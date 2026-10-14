@@ -3,411 +3,310 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1A1333">
 <title>Ava Heng · Data Analyst</title>
-<meta name="description" content="Ava Heng is a First Class Honours Business Analytics graduate and data analyst in Kuala Lumpur. Data makes people feel things; she turns those feelings into decisions.">
+<meta name="description" content="Ava Heng is a First Class Honours Business Analytics graduate and data analyst in Kuala Lumpur, working with SQL, Python, Power BI and Excel.">
 <meta property="og:title" content="Ava Heng, Data Analyst">
-<meta property="og:description" content="Data makes people feel things. I turn those feelings into decisions.">
+<meta property="og:description" content="Step inside the mind of a data analyst.">
 <meta property="og:url" content="https://avaheng.my/">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://avaheng.my/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F7F6FD;
-    --surface: #FFFFFF;
-    --ink: #1C1B2E;
-    --ink-2: #4E4C66;
-    --ink-3: #807E98;
-    --line: #E6E4F2;
+    --night: #1A1333;
+    --night-2: #241A47;
+    --glass: rgba(255,255,255,.055);
+    --glass-2: rgba(255,255,255,.09);
+    --edge: rgba(255,255,255,.12);
+    --text: #F4F0FF;
+    --text-2: #CFC6EC;
+    --text-3: #9F95C4;
 
-    --joy: #FFC233;      --joy-ink: #8A5A00;      --joy-soft: #FFF4D6;
-    --sadness: #3D7BF7;  --sadness-ink: #1F55C4;  --sadness-soft: #E3ECFE;
-    --fear: #8B5CF6;     --fear-ink: #6638D6;     --fear-soft: #EEE7FE;
-    --disgust: #2FB872;  --disgust-ink: #157F4A;  --disgust-soft: #DFF5E9;
-    --anger: #F04E37;    --anger-ink: #C42F1A;    --anger-soft: #FDE4E0;
+    --yellow: #FFD45C;
+    --blue: #5B9CFF;
+    --purple: #B48CFF;
+    --green: #5FE0A0;
+    --red: #FF6B5B;
 
-    --mood: var(--joy);
-    --mood-ink: var(--joy-ink);
-    --mood-soft: var(--joy-soft);
-    --focus: var(--fear);
+    --zone: var(--purple);
+    --focus: var(--yellow);
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #13121F; --surface: #1C1B2C; --ink: #EEEDF7; --ink-2: #B9B7CF; --ink-3: #8A88A3; --line: #2C2A42;
-      --joy-ink: #FFD268; --joy-soft: #3A3017;
-      --sadness-ink: #8DB2FF; --sadness-soft: #1C2846;
-      --fear-ink: #BFA4FF; --fear-soft: #2A2148;
-      --disgust-ink: #6BDCA0; --disgust-soft: #17342A;
-      --anger-ink: #FF8E7D; --anger-soft: #3D1F1D;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #13121F; --surface: #1C1B2C; --ink: #EEEDF7; --ink-2: #B9B7CF; --ink-3: #8A88A3; --line: #2C2A42;
-    --joy-ink: #FFD268; --joy-soft: #3A3017;
-    --sadness-ink: #8DB2FF; --sadness-soft: #1C2846;
-    --fear-ink: #BFA4FF; --fear-soft: #2A2148;
-    --disgust-ink: #6BDCA0; --disgust-soft: #17342A;
-    --anger-ink: #FF8E7D; --anger-soft: #3D1F1D;
-  }
-
-  [data-mood="joy"]     { --mood: var(--joy);     --mood-ink: var(--joy-ink);     --mood-soft: var(--joy-soft); }
-  [data-mood="sadness"] { --mood: var(--sadness); --mood-ink: var(--sadness-ink); --mood-soft: var(--sadness-soft); }
-  [data-mood="fear"]    { --mood: var(--fear);    --mood-ink: var(--fear-ink);    --mood-soft: var(--fear-soft); }
-  [data-mood="disgust"] { --mood: var(--disgust); --mood-ink: var(--disgust-ink); --mood-soft: var(--disgust-soft); }
-  [data-mood="anger"]   { --mood: var(--anger);   --mood-ink: var(--anger-ink);   --mood-soft: var(--anger-soft); }
+  .z-yellow { --zone: var(--yellow); }
+  .z-blue   { --zone: var(--blue); }
+  .z-purple { --zone: var(--purple); }
+  .z-green  { --zone: var(--green); }
+  .z-red    { --zone: var(--red); }
 
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: "DM Sans", system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.65;
+    margin: 0; color: var(--text); background: var(--night);
+    font-family: "Nunito Sans", system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.65;
+    overflow-x: hidden;
   }
-  h1, h2, h3 { font-family: "Bricolage Grotesque", "DM Sans", sans-serif; letter-spacing: -0.02em; }
+  h1, h2, h3 { font-family: "Fredoka", "Nunito Sans", sans-serif; font-weight: 600; letter-spacing: -0.01em; }
   a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px; }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 10px; }
+
+  /* ---------- The sky: a fixed glow that takes the colour of the room you're in ---------- */
+  .sky { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+         background: radial-gradient(1200px 800px at 50% -10%, var(--night-2), var(--night) 70%); }
+  .sky .glow {
+    position: absolute; width: 70vmax; height: 70vmax; left: 50%; top: 55%; transform: translate(-50%, -50%);
+    border-radius: 50%; background: var(--sky, var(--purple)); opacity: .13; filter: blur(110px);
+    transition: background-color 1.2s ease;
+  }
+  .sky .mote {
+    position: absolute; bottom: -20px; width: var(--s); height: var(--s); border-radius: 50%;
+    background: var(--c); box-shadow: 0 0 calc(var(--s) * 2.5) var(--c); opacity: 0;
+    animation: drift var(--d) linear var(--delay) infinite;
+  }
+  @keyframes drift {
+    0%   { transform: translate(0, 0); opacity: 0; }
+    10%  { opacity: var(--o); }
+    85%  { opacity: var(--o); }
+    100% { transform: translate(var(--x), -110vh); opacity: 0; }
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
   /* ---------- Top bar ---------- */
-  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; position: relative; z-index: 2; }
-  .logo {
-    font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 1.15rem;
-    text-decoration: none; color: var(--ink); display: inline-flex; align-items: center; gap: 10px;
-  }
-  .logo svg { width: 30px; height: 30px; }
-  .topbar nav { display: flex; gap: 4px; }
-  .topbar nav a { color: var(--ink-2); text-decoration: none; font-size: .95rem; padding: 8px 14px; border-radius: 999px; }
-  .topbar nav a:hover { color: var(--ink); background: var(--surface); }
-  .topbar nav .cta-nav { background: var(--ink); color: var(--bg); font-weight: 600; }
-  .topbar nav .cta-nav:hover { background: var(--ink); color: var(--bg); }
-  @media (max-width: 700px) { .topbar nav a:not(.cta-nav) { display: none; } }
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.2rem; }
+  .logo svg { width: 32px; height: 32px; }
+  .topbar nav { display: flex; gap: 2px; }
+  .topbar nav a { text-decoration: none; color: var(--text-2); font-size: .95rem; padding: 8px 14px; border-radius: 999px; font-weight: 600; }
+  .topbar nav a:hover { color: var(--text); background: var(--glass-2); }
+  .topbar nav .cta-nav { background: var(--text); color: var(--night); }
+  .topbar nav .cta-nav:hover { background: #fff; color: var(--night); }
+  @media (max-width: 720px) { .topbar nav a:not(.cta-nav) { display: none; } }
 
   /* ---------- Hero ---------- */
-  .hero { position: relative; overflow: hidden; padding-bottom: 72px; }
-  .hero::before {
-    content: ""; position: absolute; width: 760px; height: 760px; right: -220px; top: -260px;
-    border-radius: 50%; background: var(--mood); opacity: .16; filter: blur(80px);
-    transition: background-color .9s ease;
+  .hero { text-align: center; padding: 120px 0 40px; position: relative; }
+  @media (max-width: 640px) { .hero { padding-top: 72px; } }
+  .aurora { position: absolute; left: 50%; top: 40px; transform: translateX(-50%); width: min(400px, 80vw); aspect-ratio: 1; opacity: .75; }
+  .aurora span {
+    position: absolute; width: 56%; height: 56%; border-radius: 50%; filter: blur(34px); opacity: .85;
+    mix-blend-mode: screen; animation: swirl 14s ease-in-out infinite;
   }
-  .hero-grid { position: relative; display: grid; grid-template-columns: 1fr 1.02fr; gap: 56px; align-items: center; padding-top: 40px; }
-  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 16px; } }
-
+  .aurora span:nth-child(1) { background: var(--yellow); left: 22%; top: 0;   animation-delay: 0s; }
+  .aurora span:nth-child(2) { background: var(--blue);   left: 0;   top: 30%; animation-delay: -2.8s; }
+  .aurora span:nth-child(3) { background: var(--purple); left: 44%; top: 30%; animation-delay: -5.6s; }
+  .aurora span:nth-child(4) { background: var(--green);  left: 8%;  top: 52%; animation-delay: -8.4s; }
+  .aurora span:nth-child(5) { background: var(--red);    left: 36%; top: 56%; animation-delay: -11.2s; }
+  @keyframes swirl {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(14%, -10%) scale(1.08); }
+    66% { transform: translate(-12%, 8%) scale(.94); }
+  }
+  .hero-text { position: relative; }
   .hello {
-    display: inline-flex; align-items: center; gap: 10px; font-size: .95rem; color: var(--ink-2);
-    background: var(--surface); border: 1px solid var(--line); padding: 6px 14px 6px 10px; border-radius: 999px; margin: 0 0 24px;
+    display: inline-flex; align-items: center; gap: 10px; margin: 0 0 22px; font-weight: 600; font-size: .95rem; color: var(--text-2);
+    background: rgba(26,19,51,.72); border: 1px solid var(--edge); padding: 6px 16px 6px 12px; border-radius: 999px; backdrop-filter: blur(8px);
   }
-  .hello .dots { display: inline-flex; gap: 3px; }
-  .hello .dots i { width: 8px; height: 8px; border-radius: 50%; display: block; }
-  .hero h1 { font-size: clamp(2.9rem, 7vw, 5.2rem); line-height: .98; font-weight: 800; letter-spacing: -0.04em; margin: 0 0 24px; }
-  .hero .lede { font-size: clamp(1.1rem, 2.1vw, 1.28rem); color: var(--ink-2); max-width: 32ch; margin: 0 0 32px; line-height: 1.5; }
-  .hero .lede b { color: var(--ink); font-weight: 600; }
-
+  .hello i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
+  .hero h1 { font-size: clamp(3.2rem, 10vw, 6.6rem); line-height: .95; margin: 0 0 22px; font-weight: 700; letter-spacing: -0.02em;
+             text-shadow: 0 0 40px rgba(180,140,255,.35); }
+  .hero .lede { font-size: clamp(1.1rem, 2.3vw, 1.35rem); color: var(--text-2); max-width: 36ch; margin: 0 auto 34px; line-height: 1.5; text-shadow: 0 1px 14px rgba(26,19,51,.9); }
+  .hero .lede b { color: var(--text); }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero .actions { justify-content: center; }
   .btn {
-    display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: inherit; font-weight: 600;
-    padding: 13px 22px; border-radius: 14px; font-size: 1rem; cursor: pointer;
-    transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+    display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: inherit; font-weight: 700; font-size: 1rem;
+    padding: 13px 22px; border-radius: 999px; cursor: pointer; transition: transform .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .2s ease;
   }
   .btn svg { width: 18px; height: 18px; flex: none; }
-  .btn-primary { background: var(--ink); color: var(--bg); border: 1px solid var(--ink); }
-  .btn-primary:hover { transform: translateY(-1px); }
-  .btn-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
-  .btn-ghost:hover { border-color: var(--ink-3); }
-  .copy-email.done { border-color: var(--disgust); }
+  .btn-primary { background: var(--text); color: var(--night); border: 1px solid var(--text); box-shadow: 0 0 30px rgba(244,240,255,.25); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 40px rgba(244,240,255,.4); }
+  .btn-ghost { background: var(--glass-2); color: var(--text); border: 1px solid var(--edge); backdrop-filter: blur(8px); }
+  .btn-ghost:hover { border-color: rgba(255,255,255,.35); }
+  .copy-email.done { border-color: var(--green); box-shadow: 0 0 18px rgba(95,224,160,.35); }
 
-  /* ---------- Mood chart: the signature element ---------- */
-  .mood {
-    margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 26px;
-    padding: 22px 22px 18px; box-shadow: 0 30px 60px -40px rgba(28,27,46,.45);
-    border-top: 6px solid var(--mood); transition: border-color .6s ease;
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 64px 0 0; text-align: left; }
+  .stats div { background: var(--glass); border: 1px solid var(--edge); border-radius: 22px; padding: 18px 20px; backdrop-filter: blur(10px); position: relative; overflow: hidden; }
+  .stats div::before { content: ""; position: absolute; width: 90px; height: 90px; border-radius: 50%; right: -30px; top: -30px; background: var(--c); filter: blur(30px); opacity: .5; }
+  .stats b { display: block; font-family: "Fredoka", sans-serif; font-size: 2rem; font-weight: 600; line-height: 1.1; position: relative; }
+  .stats span { color: var(--text-2); font-size: .9rem; line-height: 1.35; display: block; margin-top: 4px; position: relative; }
+  @media (max-width: 760px) { .stats { grid-template-columns: 1fr 1fr; } }
+
+  /* ---------- Rooms ---------- */
+  .room {
+    position: relative; margin: 72px 0 0; padding: 44px 44px 48px; border-radius: 36px;
+    background: var(--glass); border: 1px solid var(--edge); overflow: hidden; backdrop-filter: blur(12px);
+    transition: border-color .8s ease, box-shadow .8s ease;
   }
-  .mood-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-  .mood-name {
-    font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 1.6rem; margin: 0;
-    color: var(--mood-ink); transition: color .6s ease; letter-spacing: -0.02em;
+  .room::before {
+    content: ""; position: absolute; width: 420px; height: 420px; left: -140px; top: -180px; border-radius: 50%;
+    background: var(--zone); filter: blur(90px); opacity: .1; transition: opacity 1s ease; pointer-events: none;
   }
-  .mood-tag { font-size: .85rem; color: var(--ink-3); }
-  .mood-caption { margin: 4px 0 6px; color: var(--ink-2); min-height: 3.3em; max-width: 46ch; }
-  .mood svg.plot { display: block; width: 100%; height: auto; overflow: visible; }
-  .plot .grid line { stroke: var(--line); stroke-width: 1; }
-  .plot .g-line, .plot .g-dots, .plot .g-bars, .plot .g-flag, .plot .g-ref { transition: opacity .5s ease; }
-  .plot .area { fill: var(--mood); opacity: .14; transition: fill .6s ease; }
-  .plot .line { fill: none; stroke: var(--mood); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; transition: stroke .6s ease; }
-  .plot .dot { fill: var(--mood); transition: fill .6s ease; }
-  .plot .dot.bad { fill: none; stroke: var(--ink-3); stroke-width: 2; }
-  .plot .bar { fill: var(--mood); transition: fill .6s ease; }
-  .plot .flag circle { fill: none; stroke: var(--mood); stroke-width: 2.5; stroke-dasharray: 4 4; }
-  .plot .flag text, .plot .ref text { fill: var(--ink-2); font: 600 12px "DM Sans", sans-serif; }
-  .plot .ref line { stroke: var(--ink); stroke-width: 2; stroke-dasharray: 6 5; }
+  .room.lit { border-color: color-mix(in srgb, var(--zone) 45%, transparent); box-shadow: 0 0 60px -20px var(--zone); }
+  .room.lit::before { opacity: .32; }
+  .room > * { position: relative; }
+  @media (max-width: 640px) { .room { padding: 30px 22px 32px; border-radius: 28px; margin-top: 48px; } }
 
-  .moods { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; }
-  .moods button {
-    width: 100%; font: inherit; font-size: .875rem; font-weight: 600; color: var(--ink-2);
-    background: transparent; border: 1px solid var(--line); border-radius: 12px; padding: 8px 4px 7px;
-    cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;
-    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
-  }
-  .moods button svg { width: 34px; height: 20px; }
-  .moods button:hover { border-color: var(--ink-3); color: var(--ink); }
-  .moods button[aria-pressed="true"] { background: var(--mood-soft); border-color: var(--mood); color: var(--ink); }
-  @media (max-width: 420px) { .moods button { font-size: .75rem; } .moods button svg { width: 26px; } }
+  .room-head { display: flex; align-items: center; gap: 16px; margin: 0 0 28px; }
+  .bulb { width: 18px; height: 18px; border-radius: 50%; background: var(--zone); flex: none; box-shadow: 0 0 0 6px color-mix(in srgb, var(--zone) 18%, transparent), 0 0 24px var(--zone); }
+  .room h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0; line-height: 1.1; }
+  .room h2 .plain { display: block; font-family: "Nunito Sans", sans-serif; font-size: .95rem; font-weight: 700; color: var(--zone); letter-spacing: 0; margin-bottom: 2px; }
 
-  /* ---------- Stats ---------- */
-  .stats {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    background: var(--surface); border-radius: 20px; border: 1px solid var(--line);
-  }
-  .stats div { padding: 22px 24px; }
-  .stats div + div { border-left: 1px solid var(--line); }
-  .stats b { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 2rem; line-height: 1.1; letter-spacing: -0.02em; }
-  .stats span { color: var(--ink-3); font-size: .9rem; line-height: 1.35; display: block; margin-top: 4px; }
-  @media (max-width: 720px) {
-    .stats { grid-template-columns: 1fr 1fr; }
-    .stats div:nth-child(3) { border-left: 0; }
-    .stats div:nth-child(n+3) { border-top: 1px solid var(--line); }
-  }
+  /* About */
+  .about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; }
+  .about p { margin: 0 0 1em; color: var(--text-2); max-width: 60ch; }
+  .about p.big { font-size: 1.3rem; line-height: 1.5; color: var(--text); }
+  .facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; align-content: start; }
+  .facts li { background: var(--glass); border: 1px solid var(--edge); border-radius: 18px; padding: 14px 18px; }
+  .facts b { display: block; color: var(--text); }
+  .facts span { color: var(--text-3); font-size: .925rem; }
+  @media (max-width: 820px) { .about { grid-template-columns: 1fr; gap: 24px; } }
 
-  /* ---------- Sections ---------- */
-  section.block { padding: 96px 0 0; }
-  .sec-head { display: grid; grid-template-columns: 250px 1fr; gap: 40px; }
-  .sec-head h2 { font-size: 2rem; font-weight: 700; margin: 0; line-height: 1.15; }
-  .sec-head .kicker { color: var(--ink-3); margin: 10px 0 0; font-size: .95rem; max-width: 28ch; }
-  @media (max-width: 820px) { .sec-head { grid-template-columns: 1fr; gap: 24px; } }
-
-  /* Five feelings */
-  .feelings-intro { max-width: 640px; margin: 0 0 36px; }
-  .feelings-intro h2 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.05; margin: 0 0 14px; font-weight: 800; letter-spacing: -0.03em; }
-  .feelings-intro p { color: var(--ink-2); margin: 0; font-size: 1.1rem; }
-  .feelings { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
-  .feeling {
-    display: grid; grid-template-columns: 210px 1fr 1fr; gap: 28px; align-items: start;
-    background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px 26px;
-    border-left: 8px solid var(--mood);
-  }
-  .feeling .who { display: flex; align-items: center; gap: 14px; }
-  .feeling .who svg { width: 56px; height: 34px; flex: none; }
-  .feeling h3 { margin: 0; font-size: 1.45rem; font-weight: 800; color: var(--mood-ink); letter-spacing: -0.02em; }
-  .feeling .moment { margin: 0; font-size: 1.05rem; color: var(--ink); font-weight: 500; }
-  .feeling .moment small { display: block; color: var(--ink-3); font-size: .85rem; font-weight: 500; margin-bottom: 2px; }
-  .feeling .response { margin: 0; color: var(--ink-2); }
-  .feeling .response b { color: var(--ink); font-weight: 600; display: block; }
-  @media (max-width: 860px) { .feeling { grid-template-columns: 1fr; gap: 12px; } }
-
-  .about-text p { margin: 0 0 1em; max-width: 62ch; color: var(--ink-2); }
-  .about-text p:first-child { font-size: 1.25rem; line-height: 1.55; color: var(--ink); }
-
-  /* Timeline */
+  /* Experience */
   .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
-  .timeline::before { content: ""; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
-  .job { position: relative; padding: 0 0 40px 40px; }
+  .timeline::before { content: ""; position: absolute; left: 8px; top: 12px; bottom: 12px; width: 2px; background: linear-gradient(var(--zone), transparent); opacity: .6; }
+  .job { position: relative; padding: 0 0 36px 44px; }
   .job:last-child { padding-bottom: 0; }
-  .job::before {
-    content: ""; position: absolute; left: 0; top: 7px; width: 16px; height: 16px; border-radius: 50%;
-    background: var(--surface); border: 3px solid var(--ink);
-  }
-  .job.now::before { background: var(--ink); }
-  .job .when { font-size: .9rem; color: var(--ink-3); font-weight: 500; }
-  .job h3 { font-size: 1.3rem; margin: 2px 0; font-weight: 700; line-height: 1.25; }
-  .job .org { color: var(--ink-2); font-weight: 500; margin: 0 0 12px; }
-  .job ul { margin: 0; padding-left: 1.1em; color: var(--ink-2); }
-  .job li { margin: 0 0 6px; max-width: 64ch; }
+  .job::before { content: ""; position: absolute; left: 0; top: 6px; width: 18px; height: 18px; border-radius: 50%; background: var(--night); border: 3px solid var(--zone); }
+  .job.now::before { background: var(--zone); box-shadow: 0 0 16px var(--zone); }
+  .job .when { font-size: .9rem; color: var(--text-3); font-weight: 600; }
+  .job h3 { font-size: 1.35rem; margin: 2px 0; line-height: 1.25; }
+  .job .org { color: var(--zone); font-weight: 700; margin: 0 0 10px; }
+  .job ul { margin: 0; padding-left: 1.1em; color: var(--text-2); }
+  .job li { margin: 0 0 6px; max-width: 66ch; }
+  .job li::marker { color: var(--zone); }
 
   /* Projects */
-  .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   @media (max-width: 820px) { .projects { grid-template-columns: 1fr; } }
-  .proj { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; }
-  .shift { display: flex; align-items: center; gap: 12px; padding: 16px 24px; font-weight: 600; font-size: .95rem; }
-  .shift .from, .shift .to { display: inline-flex; align-items: center; gap: 8px; }
-  .shift i { width: 12px; height: 12px; border-radius: 50%; display: block; }
-  .shift .arrow { flex: 1; height: 4px; border-radius: 2px; }
-  .proj-body { padding: 4px 26px 26px; display: flex; flex-direction: column; flex: 1; }
-  .proj .meta { font-size: .875rem; color: var(--ink-3); margin: 0 0 6px; }
-  .proj h3 { font-size: 1.35rem; margin: 0 0 10px; line-height: 1.25; }
-  .proj p { margin: 0 0 14px; color: var(--ink-2); }
-  .proj ul.points { margin: 0 0 18px; padding-left: 1.1em; color: var(--ink-2); font-size: .975rem; }
+  .proj { background: var(--glass); border: 1px solid var(--edge); border-radius: 26px; padding: 26px; display: flex; flex-direction: column; }
+  .proj .meta { font-size: .875rem; color: var(--text-3); margin: 0 0 6px; font-weight: 600; }
+  .proj h3 { font-size: 1.4rem; margin: 0 0 10px; line-height: 1.2; }
+  .proj p { margin: 0 0 14px; color: var(--text-2); }
+  .proj ul.points { margin: 0 0 18px; padding-left: 1.1em; color: var(--text-2); font-size: .975rem; }
   .proj ul.points li { margin-bottom: 5px; }
+  .proj ul.points li::marker { color: var(--zone); }
   .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
   .proj .tags { margin-top: auto; }
-  .tags li { margin: 0; font-size: .82rem; font-weight: 500; color: var(--ink-2); background: var(--bg); border: 1px solid var(--line); padding: 4px 11px; border-radius: 999px; }
+  .tags li { margin: 0; font-size: .85rem; font-weight: 700; color: var(--text); padding: 5px 12px; border-radius: 999px;
+             background: color-mix(in srgb, var(--zone) 16%, transparent); border: 1px solid color-mix(in srgb, var(--zone) 40%, transparent); }
 
   /* Skills */
-  .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 640px) { .skills { grid-template-columns: 1fr; } }
-  .skill { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px 24px; }
-  .skill h3 { font-size: 1.05rem; margin: 0 0 12px; font-weight: 700; }
-  .skill p { margin: 0; color: var(--ink-2); font-size: .975rem; }
+  .skill { background: var(--glass); border: 1px solid var(--edge); border-radius: 22px; padding: 22px 24px; }
+  .skill h3 { font-size: 1.15rem; margin: 0 0 12px; }
+  .skill p { margin: 0; color: var(--text-2); font-size: .975rem; }
 
   /* Education */
-  .edu { display: grid; gap: 18px; }
-  .edu-item { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px 24px; }
-  .edu-item .when { font-size: .875rem; color: var(--ink-3); }
-  .edu-item h3 { font-size: 1.15rem; margin: 4px 0 2px; line-height: 1.3; }
-  .edu-item p { margin: 0; color: var(--ink-2); }
-  .edu-item .gpa { display: inline-block; margin-top: 12px; font-weight: 700; color: var(--joy-ink); background: var(--joy-soft); padding: 3px 10px; border-radius: 8px; font-size: .9rem; }
-  .edu-item .modules-title { margin: 18px 0 8px; font-size: .9rem; color: var(--ink-3); }
-  .awards { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; }
-  .awards li { display: flex; gap: 16px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 20px; }
-  .awards svg { width: 22px; height: 22px; flex: none; color: var(--joy-ink); }
-  .awards b { font-weight: 600; }
-  .awards span { color: var(--ink-3); font-size: .925rem; margin-left: auto; text-align: right; }
-  .awards li.top { border-color: var(--joy); background: var(--joy-soft); }
-  .awards li.top span { color: var(--ink-2); }
+  .edu { display: grid; gap: 16px; }
+  .edu-item { background: var(--glass); border: 1px solid var(--edge); border-radius: 22px; padding: 22px 24px; }
+  .edu-item .when { font-size: .875rem; color: var(--text-3); font-weight: 600; }
+  .edu-item h3 { font-size: 1.25rem; margin: 4px 0 2px; line-height: 1.3; }
+  .edu-item p { margin: 0; color: var(--text-2); }
+  .edu-item .gpa { display: inline-block; margin-top: 12px; font-weight: 700; color: var(--night); background: var(--zone); padding: 3px 12px; border-radius: 999px; font-size: .9rem; }
+  .edu-item .modules-title { margin: 18px 0 8px; font-size: .9rem; color: var(--text-3); font-weight: 600; }
+  .awards { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+  .awards li { display: flex; gap: 16px; align-items: center; background: var(--glass); border: 1px solid var(--edge); border-radius: 18px; padding: 14px 20px; }
+  .awards svg { width: 22px; height: 22px; flex: none; color: var(--yellow); filter: drop-shadow(0 0 6px rgba(255,212,92,.6)); }
+  .awards b { font-weight: 700; }
+  .awards span { color: var(--text-3); font-size: .925rem; margin-left: auto; text-align: right; }
+  .awards li.top { border-color: rgba(255,212,92,.55); background: rgba(255,212,92,.09); box-shadow: 0 0 30px -12px var(--yellow); }
+  .awards li.top span { color: var(--text-2); }
   @media (max-width: 560px) { .awards li { flex-wrap: wrap; } .awards span { margin-left: 38px; text-align: left; width: 100%; } }
 
   /* Contact */
-  .contact {
-    margin: 104px 0 0; background: var(--ink); color: var(--bg); border-radius: 28px;
-    padding: 56px 48px 52px; position: relative; overflow: hidden;
-  }
-  .contact .spectrum { display: flex; height: 8px; position: absolute; left: 0; right: 0; top: 0; }
-  .contact .spectrum i { flex: 1; }
-  .contact h2 { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 12px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 800; }
-  .contact p { opacity: .8; margin: 0 0 30px; max-width: 46ch; }
-  .contact .btn-primary { background: var(--bg); color: var(--ink); border-color: var(--bg); }
-  .contact .btn-ghost { background: transparent; color: var(--bg); border-color: rgba(255,255,255,.3); }
-  .contact .btn-ghost:hover { border-color: var(--bg); }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .contact .btn-ghost { border-color: rgba(0,0,0,.25); } }
-  @media (max-width: 560px) { .contact { padding: 44px 24px 36px; border-radius: 22px; } }
+  .contact { text-align: center; padding: 60px 32px 56px; }
+  .contact::before { left: 50%; top: -220px; transform: translateX(-50%); width: 560px; height: 560px; }
+  .contact .room-head { justify-content: center; }
+  .contact .bulb { display: none; }
+  .contact h2 { font-size: clamp(2.2rem, 6vw, 3.4rem); }
+  .contact p { color: var(--text-2); margin: 0 auto 30px; max-width: 46ch; }
+  .contact .actions { justify-content: center; }
 
-  footer { padding: 36px 0 48px; color: var(--ink-3); font-size: .9rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-  footer a { color: var(--ink-3); }
+  footer { padding: 40px 0 56px; color: var(--text-3); font-size: .9rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  footer a { color: var(--text-3); }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    *, *::before { transition: none !important; }
+    .aurora span, .sky .mote { animation: none !important; }
+    .sky .mote { display: none; }
+    * { transition: none !important; }
   }
   @media print {
-    .topbar nav, .mood, .contact .actions, .hero::before { display: none; }
-    .hero-grid { grid-template-columns: 1fr; }
+    body { background: #fff; color: #000; }
+    .sky, .aurora, .topbar nav, .actions { display: none; }
+    .room { border: 1px solid #ccc; box-shadow: none; background: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- Reusable chart glyphs for each feeling -->
+<div class="sky" aria-hidden="true"><div class="glow"></div></div>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="g-joy" viewBox="0 0 56 34"><polyline points="4,28 16,24 26,20 36,12 52,5" fill="none" stroke="var(--joy)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="g-sadness" viewBox="0 0 56 34"><polyline points="4,8 16,10 24,12 32,24 42,28 52,29" fill="none" stroke="var(--sadness)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="g-fear" viewBox="0 0 56 34"><polyline points="4,22 14,21 22,23 30,4 36,22 44,21 52,22" fill="none" stroke="var(--fear)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="g-disgust" viewBox="0 0 56 34"><g fill="var(--disgust)"><circle cx="8" cy="22" r="3.5"/><circle cx="20" cy="8" r="3.5"/><circle cx="31" cy="26" r="3.5"/><circle cx="46" cy="12" r="3.5"/></g><g fill="none" stroke="var(--disgust)" stroke-width="2"><circle cx="15" cy="27" r="3"/><circle cx="38" cy="7" r="3"/><circle cx="50" cy="27" r="3"/></g></symbol>
-  <symbol id="g-anger" viewBox="0 0 56 34"><g fill="var(--anger)"><rect x="6" y="16" width="8" height="16" rx="2"/><rect x="18" y="10" width="8" height="22" rx="2"/><rect x="30" y="18" width="8" height="14" rx="2"/><rect x="42" y="6" width="8" height="26" rx="2"/></g><line x1="2" y1="4" x2="54" y2="4" stroke="var(--ink)" stroke-width="2" stroke-dasharray="4 3"/></symbol>
   <symbol id="medal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></g></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></g></symbol>
   <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></g></symbol>
   <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm7 0h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.62 0-1.86 1.26-1.86 2.56v4.92H10v-11Z"/></symbol>
 </svg>
 
-<header class="hero" id="hero" data-mood="joy">
-  <div class="wrap">
-    <div class="topbar">
-      <a class="logo" href="#top" aria-label="Ava Heng, back to top">
-        <svg viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="var(--ink)"/><circle cx="8" cy="11" r="3" fill="#FFC233"/><circle cx="15" cy="8" r="3" fill="#3D7BF7"/><circle cx="22" cy="11" r="3" fill="#8B5CF6"/><circle cx="11" cy="19" r="3" fill="#2FB872"/><circle cx="19" cy="19" r="3" fill="#F04E37"/></svg>
-        Ava Heng
-      </a>
-      <nav aria-label="Sections">
-        <a href="#feelings">Feelings</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a class="cta-nav" href="#contact">Contact</a>
-      </nav>
-    </div>
+<div class="wrap">
+  <header class="topbar">
+    <a class="logo" href="#top" aria-label="Ava Heng, back to top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><defs><filter id="lg" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2"/></filter></defs><circle cx="16" cy="16" r="15" fill="#2C2152" stroke="rgba(255,255,255,.2)"/><g filter="url(#lg)"><circle cx="16" cy="9.5" r="3.6" fill="#FFD45C"/><circle cx="9.5" cy="14.5" r="3.6" fill="#5B9CFF"/><circle cx="22.5" cy="14.5" r="3.6" fill="#B48CFF"/><circle cx="12" cy="21.5" r="3.6" fill="#5FE0A0"/><circle cx="20" cy="21.5" r="3.6" fill="#FF6B5B"/></g></svg>
+      Ava Heng
+    </a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a class="cta-nav" href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <div class="hero-grid" id="top">
-      <div>
-        <p class="hello"><span class="dots" aria-hidden="true"><i style="background:var(--joy)"></i><i style="background:var(--sadness)"></i><i style="background:var(--fear)"></i><i style="background:var(--disgust)"></i><i style="background:var(--anger)"></i></span>Open to data analyst roles</p>
-        <h1>Data makes people feel things.</h1>
-        <p class="lede">I’m Ava, a <b>First Class Honours Business Analytics graduate</b>. Whatever the numbers make you feel, my job is to turn it into a decision.</p>
+  <main id="top">
+    <section class="hero" data-zone="purple">
+      <div class="aurora" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="hero-text">
+        <p class="hello"><i></i>Open to data analyst roles</p>
+        <h1>Hi, I’m Ava.</h1>
+        <p class="lede">Step inside the mind of a <b>First Class Honours Business Analytics graduate</b> who turns messy data into decisions people feel good about.</p>
         <div class="actions">
           <a class="btn btn-primary" href="mailto:avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email me</a>
           <button class="btn btn-ghost copy-email" type="button" data-email="avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-copy"/></svg><span aria-live="polite">Copy email</span></button>
           <a class="btn btn-ghost" href="https://www.linkedin.com/in/ava-heng-83106724a" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
         </div>
       </div>
-
-      <figure class="mood" id="mood" data-mood="joy" aria-label="How data feels">
-        <div class="mood-head">
-          <p class="mood-name" id="mood-name">Joy</p>
-          <span class="mood-tag">How this data feels</span>
-        </div>
-        <p class="mood-caption" id="mood-caption" aria-live="polite">The trend finally goes up, and everyone can see why.</p>
-        <svg class="plot" id="plot" viewBox="0 0 420 220" role="img" aria-labelledby="mood-caption">
-          <g class="grid"><line x1="20" y1="40" x2="400" y2="40"/><line x1="20" y1="100" x2="400" y2="100"/><line x1="20" y1="160" x2="400" y2="160"/><line x1="20" y1="210" x2="400" y2="210"/></g>
-          <g class="g-bars"></g>
-          <g class="g-line"><path class="area"/><polyline class="line"/></g>
-          <g class="g-dots"></g>
-          <g class="g-ref ref"><line x1="20" x2="400"/><text x="400" text-anchor="end">Other report’s total</text></g>
-          <g class="g-flag flag"><circle r="16"/><text text-anchor="middle">Explain this?</text></g>
-        </svg>
-        <ul class="moods" aria-label="Choose a feeling">
-          <li><button type="button" data-mood="joy" aria-pressed="true"><svg><use href="#g-joy"/></svg>Joy</button></li>
-          <li><button type="button" data-mood="sadness" aria-pressed="false"><svg><use href="#g-sadness"/></svg>Sadness</button></li>
-          <li><button type="button" data-mood="fear" aria-pressed="false"><svg><use href="#g-fear"/></svg>Fear</button></li>
-          <li><button type="button" data-mood="disgust" aria-pressed="false"><svg><use href="#g-disgust"/></svg>Disgust</button></li>
-          <li><button type="button" data-mood="anger" aria-pressed="false"><svg><use href="#g-anger"/></svg>Anger</button></li>
-        </ul>
-      </figure>
-    </div>
-  </div>
-</header>
-
-<main class="wrap">
-  <div class="stats" aria-label="Highlights">
-    <div><b>3.74</b><span>CGPA, First Class Honours</span></div>
-    <div><b>12</b><span>A+ grades, including Big Data and Finance Analytics</span></div>
-    <div><b>2×</b><span>Dean’s List, Sunway University</span></div>
-    <div><b>3</b><span>Jeffrey Cheah awards and scholarships</span></div>
-  </div>
-
-  <section class="block" id="feelings">
-    <div class="feelings-intro">
-      <h2>Five feelings every dataset brings out</h2>
-      <p>Every analyst meets these moments. Here’s what I do with each one, and where I’ve done it.</p>
-    </div>
-    <ol class="feelings">
-      <li class="feeling" data-mood="joy">
-        <div class="who"><svg aria-hidden="true"><use href="#g-joy"/></svg><h3>Joy</h3></div>
-        <p class="moment"><small>The moment</small>The chart goes up and the reason is obvious.</p>
-        <p class="response"><b>Make the good news easy to see.</b>Built Power BI dashboards at ChargEV so the team could follow business performance and user activity at a glance.</p>
-      </li>
-      <li class="feeling" data-mood="sadness">
-        <div class="who"><svg aria-hidden="true"><use href="#g-sadness"/></svg><h3>Sadness</h3></div>
-        <p class="moment"><small>The moment</small>A number drops, and real people are behind it.</p>
-        <p class="response"><b>Understand the people first.</b>Segmented EV drivers by charging behaviour with K-Means and KNN, and as a student rep turned classmates’ feedback into points for staff meetings.</p>
-      </li>
-      <li class="feeling" data-mood="fear">
-        <div class="who"><svg aria-hidden="true"><use href="#g-fear"/></svg><h3>Fear</h3></div>
-        <p class="moment"><small>The moment</small>One point nobody can explain. Mistake or risk?</p>
-        <p class="response"><b>Check it, then write it down properly.</b>Drafted board minutes to corporate governance standards at Boardroom, and built automatic validation into the shareholding platform.</p>
-      </li>
-      <li class="feeling" data-mood="disgust">
-        <div class="who"><svg aria-hidden="true"><use href="#g-disgust"/></svg><h3>Disgust</h3></div>
-        <p class="moment"><small>The moment</small>Duplicates, blanks and dates in four formats.</p>
-        <p class="response"><b>Clean it once, then automate it.</b>Built workflows that clean and validate raw Excel and CSV shareholder registers as soon as they’re uploaded.</p>
-      </li>
-      <li class="feeling" data-mood="anger">
-        <div class="who"><svg aria-hidden="true"><use href="#g-anger"/></svg><h3>Anger</h3></div>
-        <p class="moment"><small>The moment</small>Two reports, two different totals, one tense meeting.</p>
-        <p class="response"><b>Make every number mean the same thing.</b>Built a fund dictionary that classifies every shareholder the same way, period after period.</p>
-      </li>
-    </ol>
-  </section>
-
-  <section class="block" id="about">
-    <div class="sec-head">
-      <div><h2>About me</h2></div>
-      <div class="about-text">
-        <p>I graduated from Sunway University with First Class Honours in Business Analytics, and I like the whole journey from raw data to a decision someone can act on.</p>
-        <p>At Yinson Greentech’s ChargEV I analysed operational and user data with SQL and Power BI, built dashboards to monitor the business, and used K-Means and KNN to segment EV drivers by how they charge. Outside of analytics I’ve worked with company secretaries at Boardroom Corporate Services, which taught me to write precisely for boards, and I’ve tutored IGCSE Additional Mathematics, which taught me to explain hard ideas simply.</p>
-        <p>I’m fluent in English and Chinese, and I’m looking for a data analyst role where I can help a team make better decisions with its data.</p>
+      <div class="stats" aria-label="Highlights">
+        <div style="--c:var(--yellow)"><b>3.74</b><span>CGPA, First Class Honours</span></div>
+        <div style="--c:var(--blue)"><b>12</b><span>A+ grades, including Big Data and Finance Analytics</span></div>
+        <div style="--c:var(--purple)"><b>2×</b><span>Dean’s List, Sunway University</span></div>
+        <div style="--c:var(--green)"><b>3</b><span>Jeffrey Cheah awards and scholarships</span></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="block" id="experience">
-    <div class="sec-head">
-      <div><h2>Experience</h2></div>
+    <section class="room z-yellow" id="about" data-zone="yellow">
+      <div class="room-head"><span class="bulb" aria-hidden="true"></span><h2><span class="plain">About</span>So, who is Ava?</h2></div>
+      <div class="about">
+        <div>
+          <p class="big">I graduated from Sunway University with First Class Honours in Business Analytics, and I like the whole journey from raw data to a decision someone can act on.</p>
+          <p>At Yinson Greentech’s ChargEV I analysed operational and user data with SQL and Power BI, built dashboards to monitor the business, and used K-Means and KNN to segment EV drivers by how they charge. Outside of analytics I’ve worked with company secretaries at Boardroom Corporate Services, which taught me to write precisely for boards, and I’ve tutored IGCSE Additional Mathematics, which taught me to explain hard ideas simply.</p>
+          <p>I’m looking for a data analyst role where I can help a team make better decisions with its data.</p>
+        </div>
+        <ul class="facts">
+          <li><b>Based in Kuala Lumpur</b><span>Open to data analyst roles</span></li>
+          <li><b>English and Chinese</b><span>Fluent, spoken and written</span></li>
+          <li><b>SQL, Python, Power BI, Excel</b><span>My everyday toolkit</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="room z-blue" id="experience" data-zone="blue">
+      <div class="room-head"><span class="bulb" aria-hidden="true"></span><h2><span class="plain">Experience</span>Where I’ve been working</h2></div>
       <ol class="timeline">
         <li class="job">
           <span class="when">Jan 2025 – Mar 2025</span>
@@ -446,58 +345,39 @@
           </ul>
         </li>
       </ol>
-    </div>
-  </section>
+    </section>
 
-  <section class="block" id="projects">
-    <div class="sec-head">
-      <div><h2>Projects</h2><p class="kicker">Each one starts with a bad feeling and ends with a better one.</p></div>
+    <section class="room z-blue" id="projects" data-zone="blue">
+      <div class="room-head"><span class="bulb" aria-hidden="true"></span><h2><span class="plain">Projects</span>Things I’ve built</h2></div>
       <div class="projects">
         <article class="proj">
-          <div class="shift" style="background:linear-gradient(90deg,var(--disgust-soft),var(--joy-soft))">
-            <span class="from"><i style="background:var(--disgust)"></i>Disgust</span>
-            <span class="arrow" style="background:linear-gradient(90deg,var(--disgust),var(--joy))" aria-hidden="true"></span>
-            <span class="to"><i style="background:var(--joy)"></i>Joy</span>
-          </div>
-          <div class="proj-body">
-            <p class="meta">Equity advisory · Full-stack data project</p>
-            <h3>Shareholding analysis platform</h3>
-            <p>Analysts spent hours classifying thousands of holders in raw shareholder registers each period. I built a web platform that does it automatically.</p>
-            <ul class="points">
-              <li>Upload Excel or CSV registers; automated workflows clean and validate them</li>
-              <li>A fund dictionary maps each holder to promoter, local, foreign or retail</li>
-              <li>Dashboards show ownership splits, trends, and top buyers and sellers between periods</li>
-              <li>One-click PDF export for client reports</li>
-            </ul>
-            <ul class="tags"><li>SQL</li><li>Excel</li><li>n8n</li><li>TypeScript</li><li>Next.js</li><li>Supabase</li></ul>
-          </div>
+          <p class="meta">Equity advisory · Full-stack data project</p>
+          <h3>Shareholding analysis platform</h3>
+          <p>Analysts spent hours classifying thousands of holders in raw shareholder registers each period. I built a web platform that does it automatically.</p>
+          <ul class="points">
+            <li>Upload Excel or CSV registers; automated workflows clean and validate them</li>
+            <li>A fund dictionary maps each holder to promoter, local, foreign or retail</li>
+            <li>Dashboards show ownership splits, trends, and top buyers and sellers between periods</li>
+            <li>One-click PDF export for client reports</li>
+          </ul>
+          <ul class="tags"><li>SQL</li><li>Excel</li><li>n8n</li><li>TypeScript</li><li>Next.js</li><li>Supabase</li></ul>
         </article>
-
         <article class="proj">
-          <div class="shift" style="background:linear-gradient(90deg,var(--sadness-soft),var(--joy-soft))">
-            <span class="from"><i style="background:var(--sadness)"></i>Sadness</span>
-            <span class="arrow" style="background:linear-gradient(90deg,var(--sadness),var(--joy))" aria-hidden="true"></span>
-            <span class="to"><i style="background:var(--joy)"></i>Joy</span>
-          </div>
-          <div class="proj-body">
-            <p class="meta">Yinson Greentech ChargEV · Internship</p>
-            <h3>EV charging behaviour segmentation</h3>
-            <p>To understand who uses the charging network and how, I clustered charging sessions into user groups the business could plan around.</p>
-            <ul class="points">
-              <li>Prepared operational and user data with SQL</li>
-              <li>Applied K-Means and KNN to find distinct charging behaviours and usage patterns</li>
-              <li>Built Power BI dashboards to track performance and user activity</li>
-            </ul>
-            <ul class="tags"><li>SQL</li><li>K-Means</li><li>KNN</li><li>Power BI</li></ul>
-          </div>
+          <p class="meta">Yinson Greentech ChargEV · Internship</p>
+          <h3>EV charging behaviour segmentation</h3>
+          <p>To understand who uses the charging network and how, I clustered charging sessions into user groups the business could plan around.</p>
+          <ul class="points">
+            <li>Prepared operational and user data with SQL</li>
+            <li>Applied K-Means and KNN to find distinct charging behaviours and usage patterns</li>
+            <li>Built Power BI dashboards to track performance and user activity</li>
+          </ul>
+          <ul class="tags"><li>SQL</li><li>K-Means</li><li>KNN</li><li>Power BI</li></ul>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="block" id="skills">
-    <div class="sec-head">
-      <div><h2>Skills</h2></div>
+    <section class="room z-green" id="skills" data-zone="green">
+      <div class="room-head"><span class="bulb" aria-hidden="true"></span><h2><span class="plain">Skills</span>What I’m good at</h2></div>
       <div class="skills">
         <div class="skill">
           <h3>Analysis and dashboards</h3>
@@ -516,60 +396,55 @@
           <p>I explain analysis to non-technical people, work well on my own or in a team, and speak and write English and Chinese fluently.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="block" id="education">
-    <div class="sec-head">
-      <div><h2>Education</h2></div>
-      <div>
-        <div class="edu">
-          <div class="edu-item">
-            <span class="when">Aug 2022 – Jan 2026</span>
-            <h3>Bachelor of Business Analytics (Honours), First Class</h3>
-            <p>Sunway University</p>
-            <span class="gpa">CGPA 3.74</span>
-            <p class="modules-title">A+ in</p>
-            <ul class="tags">
-              <li>Big Data Analytics and Visualisation</li><li>Finance Analytics</li><li>Web and Social Media Analytics</li>
-              <li>Business Database Systems</li><li>Quantitative Methods for Business</li><li>Business Statistics</li>
-              <li>Business Information Systems Development</li>
-            </ul>
-          </div>
-          <div class="edu-item">
-            <span class="when">Apr 2021 – Feb 2022</span>
-            <h3>Foundation in Arts</h3>
-            <p>Sunway College</p>
-            <span class="gpa">CGPA 3.77</span>
-          </div>
+    <section class="room z-purple" id="education" data-zone="purple">
+      <div class="room-head"><span class="bulb" aria-hidden="true"></span><h2><span class="plain">Education and awards</span>What I studied</h2></div>
+      <div class="edu">
+        <div class="edu-item">
+          <span class="when">Aug 2022 – Jan 2026</span>
+          <h3>Bachelor of Business Analytics (Honours), First Class</h3>
+          <p>Sunway University</p>
+          <span class="gpa">CGPA 3.74</span>
+          <p class="modules-title">A+ in</p>
+          <ul class="tags">
+            <li>Big Data Analytics and Visualisation</li><li>Finance Analytics</li><li>Web and Social Media Analytics</li>
+            <li>Business Database Systems</li><li>Quantitative Methods for Business</li><li>Business Statistics</li>
+            <li>Business Information Systems Development</li>
+          </ul>
         </div>
-        <ul class="awards" aria-label="Honours and awards">
-          <li class="top"><svg aria-hidden="true"><use href="#medal"/></svg><b>Tan Sri Sir Jeffrey Cheah Scholastic Award</b><span>For outstanding academic results</span></li>
-          <li><svg aria-hidden="true"><use href="#medal"/></svg><b>Dean’s List Award, twice</b><span>Apr–Aug 2024 and Sep 2024–Jan 2025</span></li>
-          <li><svg aria-hidden="true"><use href="#medal"/></svg><b>Jeffrey Cheah ACE Scholarship</b><span>2022 – 2025</span></li>
-          <li><svg aria-hidden="true"><use href="#medal"/></svg><b>Jeffrey Cheah Entrance Scholarship</b><span>2021</span></li>
-        </ul>
+        <div class="edu-item">
+          <span class="when">Apr 2021 – Feb 2022</span>
+          <h3>Foundation in Arts</h3>
+          <p>Sunway College</p>
+          <span class="gpa">CGPA 3.77</span>
+        </div>
       </div>
-    </div>
-  </section>
+      <ul class="awards" aria-label="Honours and awards">
+        <li class="top"><svg aria-hidden="true"><use href="#medal"/></svg><b>Tan Sri Sir Jeffrey Cheah Scholastic Award</b><span>For outstanding academic results</span></li>
+        <li><svg aria-hidden="true"><use href="#medal"/></svg><b>Dean’s List Award, twice</b><span>Apr–Aug 2024 and Sep 2024–Jan 2025</span></li>
+        <li><svg aria-hidden="true"><use href="#medal"/></svg><b>Jeffrey Cheah ACE Scholarship</b><span>2022 – 2025</span></li>
+        <li><svg aria-hidden="true"><use href="#medal"/></svg><b>Jeffrey Cheah Entrance Scholarship</b><span>2021</span></li>
+      </ul>
+    </section>
 
-  <section class="contact" id="contact">
-    <div class="spectrum" aria-hidden="true"><i style="background:var(--joy)"></i><i style="background:var(--sadness)"></i><i style="background:var(--fear)"></i><i style="background:var(--disgust)"></i><i style="background:var(--anger)"></i></div>
-    <h2>Let’s find the joy in your data.</h2>
-    <p>I’m looking for a data analyst role in Kuala Lumpur. Email is the fastest way to reach me.</p>
-    <div class="actions">
-      <a class="btn btn-primary" href="mailto:avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>avaheng2004@hotmail.com</a>
-      <button class="btn btn-ghost copy-email" type="button" data-email="avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-copy"/></svg><span aria-live="polite">Copy email</span></button>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/ava-heng-83106724a" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-ghost" href="https://github.com/avaheng1105" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </section>
+    <section class="room z-red contact" id="contact" data-zone="red">
+      <div class="room-head"><span class="bulb" aria-hidden="true"></span><h2><span class="plain">Contact</span>Shall we talk?</h2></div>
+      <p>I’m looking for a data analyst role in Kuala Lumpur. Email is the fastest way to reach me.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>avaheng2004@hotmail.com</a>
+        <button class="btn btn-ghost copy-email" type="button" data-email="avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-copy"/></svg><span aria-live="polite">Copy email</span></button>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/ava-heng-83106724a" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/avaheng1105" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <span>© <span id="yr">2026</span> Ava Heng Xiao Nan</span>
     <a href="#top">Back to top</a>
   </footer>
-</main>
+</div>
 
 <script>
 (function () {
@@ -596,109 +471,41 @@
     });
   });
 
-  // ---- Mood chart ----
-  var NS = 'http://www.w3.org/2000/svg';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var hero = document.getElementById('hero');
-  var card = document.getElementById('mood');
-  var nameEl = document.getElementById('mood-name');
-  var capEl = document.getElementById('mood-caption');
-  var plot = document.getElementById('plot');
-  var N = 12, X0 = 40, X1 = 380, TOP = 30, BOT = 210;
-  function xs() { var a = []; for (var i = 0; i < N; i++) a.push(X0 + (X1 - X0) * i / (N - 1)); return a; }
-  var baseX = xs();
+  var sky = document.querySelector('.sky');
+  var COLORS = { yellow: '#FFD45C', blue: '#5B9CFF', purple: '#B48CFF', green: '#5FE0A0', red: '#FF6B5B' };
 
-  // values are 0 (bottom) .. 1 (top)
-  var MOODS = {
-    joy:     { name: 'Joy', caption: 'The trend finally goes up, and everyone can see why.',
-               y: [.12,.16,.15,.24,.3,.34,.45,.5,.6,.68,.8,.9], show: { line: 1, dots: 0, bars: 0, ref: 0, flag: 0 } },
-    sadness: { name: 'Sadness', caption: 'Usage drops. Behind every dip is a group of people worth understanding.',
-               y: [.78,.8,.76,.74,.7,.52,.36,.3,.27,.25,.26,.24], show: { line: 1, dots: 0, bars: 0, ref: 0, flag: 0 } },
-    fear:    { name: 'Fear', caption: 'One point nobody can explain. Is it a mistake, or a risk?',
-               y: [.42,.45,.4,.44,.43,.41,.46,.42,.95,.44,.41,.43], show: { line: 1, dots: 0, bars: 0, ref: 0, flag: 1 }, flag: 8 },
-    disgust: { name: 'Disgust', caption: 'Duplicates, blanks and dates in four formats. Every analyst knows this one.',
-               y: [.7,.22,.55,.85,.1,.62,.35,.78,.18,.5,.9,.3], jitter: [-14,18,-8,10,-20,6,22,-16,12,-6,8,-10],
-               bad: [1,4,7,10], show: { line: 0, dots: 1, bars: 0, ref: 0, flag: 0 } },
-    anger:   { name: 'Anger', caption: 'Two reports, two different totals, one very tense meeting.',
-               y: [.35,.42,.38,.5,.46,.55,.5,.6,.56,.64,.6,.7], show: { line: 0, dots: 0, bars: 1, ref: 1, flag: 0 }, ref: .86 }
-  };
-  var ORDER = ['joy', 'sadness', 'fear', 'disgust', 'anger'];
-
-  function toY(v) { return BOT - v * (BOT - TOP); }
-  var gLine = plot.querySelector('.g-line'), line = plot.querySelector('.line'), area = plot.querySelector('.area');
-  var gDots = plot.querySelector('.g-dots'), gBars = plot.querySelector('.g-bars');
-  var gRef = plot.querySelector('.g-ref'), gFlag = plot.querySelector('.g-flag');
-  var dots = [], bars = [];
-  for (var i = 0; i < N; i++) {
-    var c = document.createElementNS(NS, 'circle'); c.setAttribute('r', 7); c.setAttribute('class', 'dot'); gDots.appendChild(c); dots.push(c);
-    var r = document.createElementNS(NS, 'rect'); r.setAttribute('class', 'bar'); r.setAttribute('rx', 4); r.setAttribute('width', 20); gBars.appendChild(r); bars.push(r);
-  }
-
-  var cur = { y: MOODS.joy.y.slice(), j: new Array(N).fill(0) };
-  function draw(state) {
-    var pts = [];
-    for (var i = 0; i < N; i++) {
-      var x = baseX[i], y = toY(state.y[i]);
-      pts.push(x.toFixed(1) + ',' + y.toFixed(1));
-      dots[i].setAttribute('cx', (x + state.j[i]).toFixed(1)); dots[i].setAttribute('cy', y.toFixed(1));
-      bars[i].setAttribute('x', (x - 10).toFixed(1)); bars[i].setAttribute('y', y.toFixed(1));
-      bars[i].setAttribute('height', Math.max(0, BOT - y).toFixed(1));
-    }
-    line.setAttribute('points', pts.join(' '));
-    area.setAttribute('d', 'M' + X0 + ',' + BOT + ' L' + pts.join(' L') + ' L' + X1 + ',' + BOT + ' Z');
-  }
-  function setGroups(m) {
-    gLine.style.opacity = m.show.line; gDots.style.opacity = m.show.dots; gBars.style.opacity = m.show.bars;
-    gRef.style.opacity = m.show.ref; gFlag.style.opacity = m.show.flag;
-    dots.forEach(function (d, i) { d.classList.toggle('bad', !!(m.bad && m.bad.indexOf(i) > -1)); });
-    if (m.ref) {
-      var ry = toY(m.ref);
-      gRef.querySelector('line').setAttribute('y1', ry); gRef.querySelector('line').setAttribute('y2', ry);
-      gRef.querySelector('text').setAttribute('y', ry - 8);
-    }
-    if (m.flag != null) {
-      var fx = baseX[m.flag], fy = toY(m.y[m.flag]);
-      gFlag.querySelector('circle').setAttribute('cx', fx); gFlag.querySelector('circle').setAttribute('cy', fy);
-      gFlag.querySelector('text').setAttribute('x', fx); gFlag.querySelector('text').setAttribute('y', fy - 24);
-    }
-  }
-
-  var anim = null;
-  function go(key) {
-    var m = MOODS[key];
-    hero.setAttribute('data-mood', key); card.setAttribute('data-mood', key);
-    nameEl.textContent = m.name; capEl.textContent = m.caption;
-    document.querySelectorAll('.moods button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.mood === key ? 'true' : 'false'); });
-    var from = { y: cur.y.slice(), j: cur.j.slice() };
-    var to = { y: m.y.slice(), j: m.jitter ? m.jitter.slice() : new Array(N).fill(0) };
-    setGroups(m);
-    if (anim) cancelAnimationFrame(anim);
-    if (reduce) { cur = to; draw(cur); return; }
-    var t0 = null, D = 700;
-    function step(t) {
-      if (!t0) t0 = t;
-      var p = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - p, 3);
-      for (var i = 0; i < N; i++) { cur.y[i] = from.y[i] + (to.y[i] - from.y[i]) * e; cur.j[i] = from.j[i] + (to.j[i] - from.j[i]) * e; }
-      draw(cur);
-      if (p < 1) anim = requestAnimationFrame(step);
-    }
-    anim = requestAnimationFrame(step);
-  }
-
-  draw(cur); setGroups(MOODS.joy);
-
-  // Auto-play through the feelings until the visitor picks one.
-  var idx = 0, timer = null;
-  function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
+  // ---- Floating light motes ----
   if (!reduce) {
-    timer = setInterval(function () { idx = (idx + 1) % ORDER.length; go(ORDER[idx]); }, 3600);
-    card.addEventListener('mouseenter', stopAuto);
-    card.addEventListener('focusin', stopAuto);
-    card.addEventListener('touchstart', stopAuto, { passive: true });
+    var palette = Object.keys(COLORS).map(function (k) { return COLORS[k]; });
+    var count = window.innerWidth < 640 ? 16 : 30;
+    for (var i = 0; i < count; i++) {
+      var m = document.createElement('span');
+      m.className = 'mote';
+      var s = 2 + Math.random() * 4;
+      m.style.cssText = '--s:' + s.toFixed(1) + 'px;--c:' + palette[i % palette.length] +
+        ';--d:' + (16 + Math.random() * 18).toFixed(1) + 's;--delay:' + (-Math.random() * 30).toFixed(1) + 's' +
+        ';--x:' + ((Math.random() - .5) * 160).toFixed(0) + 'px;--o:' + (.35 + Math.random() * .45).toFixed(2) +
+        ';left:' + (Math.random() * 100).toFixed(1) + '%';
+      sky.appendChild(m);
+    }
   }
-  document.querySelectorAll('.moods button').forEach(function (b) {
-    b.addEventListener('click', function () { stopAuto(); idx = ORDER.indexOf(b.dataset.mood); go(b.dataset.mood); });
-  });
+
+  // ---- Rooms light up, and the sky takes their colour ----
+  var zones = document.querySelectorAll('[data-zone]');
+  function setSky(z) { sky.style.setProperty('--sky', COLORS[z]); }
+  setSky('purple');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.target.classList.contains('room')) e.target.classList.toggle('lit', e.isIntersecting);
+        if (e.isIntersecting) setSky(e.target.getAttribute('data-zone'));
+      });
+    }, { rootMargin: '-40% 0px -40% 0px' });
+    zones.forEach(function (z) { io.observe(z); });
+  } else {
+    document.querySelectorAll('.room').forEach(function (r) { r.classList.add('lit'); });
+  }
 })();
 </script>
 </body>
