@@ -124,7 +124,7 @@
   @media (max-width: 640px) { .facts { grid-template-columns: 1fr; } }
 
   /* Experience */
-  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline { list-style: none; margin: 0; }
   .job { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 0 0 32px; margin: 0 0 32px; border-bottom: 1px solid var(--line); }
   .job:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
   .job .when { font-size: .9rem; color: var(--text-3); padding-top: 4px; }
@@ -178,7 +178,43 @@
   footer { margin-top: 88px; padding: 28px 0 48px; border-top: 1px solid var(--line); color: var(--text-3); font-size: .875rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
   footer a { color: var(--text-3); }
 
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  /* Scroll progress in the five colours */
+  .progress { position: fixed; left: 0; top: 0; height: 3px; width: 100%; z-index: 50; transform-origin: 0 50%; transform: scaleX(0);
+              background: linear-gradient(90deg, var(--yellow), var(--blue), var(--purple), var(--green), var(--red)); }
+
+  /* Hero layout and flowing stream chart */
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
+  .hero-art { position: relative; aspect-ratio: 1 / 1; max-width: 480px; justify-self: end; width: 100%; }
+  .hero-art::before { content: ""; position: absolute; inset: 12% 8%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(166,133,242,.28), transparent 70%); filter: blur(30px); }
+  .hero-art svg { position: relative; width: 100%; height: 100%; display: block; }
+  .hero-art .axis { stroke: var(--line); stroke-width: 1; }
+  .hero-art .tick { fill: var(--text-3); font: 500 11px "IBM Plex Sans", sans-serif; }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 8px; }
+    .hero-art { justify-self: center; max-width: 420px; aspect-ratio: 4 / 3; }
+  }
+
+  /* Timeline rail that fills as you read */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before { content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
+  .timeline::after { content: ""; position: absolute; left: 5px; top: 8px; width: 2px; height: var(--fill, 0px); background: linear-gradient(var(--blue), var(--purple)); border-radius: 1px; }
+  .job { position: relative; }
+  .job::before { content: ""; position: absolute; left: -32px; top: 6px; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--line); transition: background-color .4s ease, border-color .4s ease, box-shadow .4s ease; }
+  .job.passed::before { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 0 4px rgba(91,149,245,.18); }
+
+  /* Cards respond to the pointer */
+  .proj, .skill, .edu-item, .contact-card { position: relative; overflow: hidden; transition: transform .25s ease, border-color .25s ease; }
+  .proj::after, .skill::after, .edu-item::after, .contact-card::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s ease;
+    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--zone) 16%, transparent), transparent 70%);
+  }
+  .proj:hover, .skill:hover, .edu-item:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--zone) 55%, var(--line)); }
+  .proj:hover::after, .skill:hover::after, .edu-item:hover::after, .contact-card:hover::after { opacity: 1; }
+  .proj > *, .skill > *, .edu-item > *, .contact-card > * { position: relative; z-index: 1; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .progress { display: none; } }
   @media print {
     body { background: #fff; color: #000; }
     .sky, .topbar nav, .actions { display: none; }
@@ -187,6 +223,7 @@
 </head>
 <body>
 
+<div class="progress" aria-hidden="true"></div>
 <div class="sky" aria-hidden="true"><div class="glow"></div></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -213,6 +250,7 @@
 
   <main id="top">
     <section class="hero" data-zone="purple">
+      <div class="hero-grid">
       <div class="hero-text">
         <p class="hello"><i></i>Open to data analyst roles</p>
         <h1>Ava Heng<br>Data Analyst</h1>
@@ -224,11 +262,13 @@
           <a class="btn btn-ghost" href="https://www.linkedin.com/in/ava-heng-83106724a" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
         </div>
       </div>
+      <div class="hero-art" aria-hidden="true"><svg id="stream" viewBox="0 0 480 480" preserveAspectRatio="xMidYMid meet"></svg></div>
+      </div>
       <div class="stats" aria-label="Highlights">
-        <div style="--c:var(--yellow)"><b>3.74</b><span>CGPA, First Class Honours</span></div>
-        <div style="--c:var(--blue)"><b>12</b><span>A+ grades, including Big Data and Finance Analytics</span></div>
-        <div style="--c:var(--purple)"><b>2×</b><span>Dean’s List, Sunway University</span></div>
-        <div style="--c:var(--green)"><b>3</b><span>Jeffrey Cheah awards and scholarships</span></div>
+        <div style="--c:var(--yellow)"><b data-count="3.74" data-dec="2">3.74</b><span>CGPA, First Class Honours</span></div>
+        <div style="--c:var(--blue)"><b data-count="12">12</b><span>A+ grades, including Big Data and Finance Analytics</span></div>
+        <div style="--c:var(--purple)"><b data-count="2" data-suffix="×">2×</b><span>Dean’s List, Sunway University</span></div>
+        <div style="--c:var(--green)"><b data-count="3">3</b><span>Jeffrey Cheah awards and scholarships</span></div>
       </div>
     </section>
 
@@ -436,7 +476,109 @@
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var sky = document.querySelector('.sky');
-  var COLORS = { yellow: '#FFD45C', blue: '#5B9CFF', purple: '#B48CFF', green: '#5FE0A0', red: '#FF6B5B' };
+  var COLORS = { yellow: '#F5C451', blue: '#5B95F5', purple: '#A685F2', green: '#52C98C', red: '#EE6A5A' };
+
+  // ---- Flowing stream chart in the hero ----
+  (function () {
+    var svg = document.getElementById('stream'); if (!svg) return;
+    var NS = 'http://www.w3.org/2000/svg', W = 480, H = 480, PAD = 36, N = 28;
+    var order = ['yellow', 'blue', 'purple', 'green', 'red'];
+    var g = document.createElementNS(NS, 'g'); svg.appendChild(g);
+    var ax = document.createElementNS(NS, 'line');
+    ax.setAttribute('class', 'axis'); ax.setAttribute('x1', PAD); ax.setAttribute('x2', W - PAD); ax.setAttribute('y1', H - 22); ax.setAttribute('y2', H - 22);
+    svg.appendChild(ax);
+    ['Q1', 'Q2', 'Q3', 'Q4'].forEach(function (q, i) {
+      var t = document.createElementNS(NS, 'text'); t.setAttribute('class', 'tick');
+      t.setAttribute('x', PAD + (W - 2 * PAD) * (i + .5) / 4); t.setAttribute('y', H - 6); t.setAttribute('text-anchor', 'middle'); t.textContent = q;
+      svg.appendChild(t);
+    });
+    var paths = order.map(function (k) {
+      var p = document.createElementNS(NS, 'path');
+      p.setAttribute('fill', COLORS[k]); p.setAttribute('fill-opacity', '.92');
+      p.setAttribute('stroke', '#12111A'); p.setAttribute('stroke-width', '1.5'); g.appendChild(p); return p;
+    });
+    var seeds = order.map(function (_, i) { return [1.3 + i * .37, 2.1 + i * .21, .7 + i * .53, i * 1.7]; });
+    function val(li, x, t) {
+      var s = seeds[li];
+      return 1 + .8 * Math.sin(x * s[0] + t * .6 + s[3]) * .5 + .5 * Math.sin(x * s[1] - t * .45 + s[3] * 2) * .5 + .35 * Math.cos(x * s[2] + t * .3);
+    }
+    function smooth(pts) {
+      var d = 'M' + pts[0][0].toFixed(1) + ',' + pts[0][1].toFixed(1);
+      for (var i = 0; i < pts.length - 1; i++) {
+        var p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+        d += ' C' + (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1) + ',' + (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1) +
+             ' ' + (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1) + ',' + (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1) +
+             ' ' + p2[0].toFixed(1) + ',' + p2[1].toFixed(1);
+      }
+      return d;
+    }
+    function draw(t) {
+      var xs = [], layers = order.map(function () { return []; }), tot = [];
+      for (var i = 0; i < N; i++) {
+        var u = i / (N - 1), sum = 0;
+        xs.push(PAD + u * (W - 2 * PAD));
+        for (var l = 0; l < order.length; l++) { var v = Math.max(.15, val(l, u * 3.2, t)) * (0.55 + u * 0.75); layers[l].push(v); sum += v; }
+        tot.push(sum);
+      }
+      var max = 0; tot.forEach(function (v) { max = Math.max(max, v); });
+      var scale = (H - 2 * PAD - 40) / Math.max(max, 6.5), mid = (H - 40) / 2 + 6;
+      var base = tot.map(function (v) { return mid - v * scale / 2; });
+      layers.forEach(function (layer, l) {
+        var top = [], bot = [];
+        for (var i = 0; i < N; i++) { var y0 = base[i]; var y1 = y0 + layer[i] * scale; top.push([xs[i], y0]); bot.push([xs[i], y1]); base[i] = y1; }
+        var d = smooth(top) + ' L' + smooth(bot.slice().reverse()).slice(1) + ' Z';
+        paths[l].setAttribute('d', d);
+      });
+    }
+    var reduceM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var visible = true, start = performance.now();
+    draw(0);
+    if (reduceM) return;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(svg);
+    (function loop(now) { if (visible && !document.hidden) draw((now - start) / 1000); requestAnimationFrame(loop); })(start);
+  })();
+
+  // ---- Highlight numbers count up when they come into view ----
+  (function () {
+    var els = document.querySelectorAll('[data-count]');
+    if (reduce || !('IntersectionObserver' in window)) return;
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return; io2.unobserve(e.target);
+        var el = e.target, to = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0), suf = el.dataset.suffix || '', t0 = null;
+        (function step(t) {
+          if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1200), v = to * (1 - Math.pow(1 - p, 3));
+          el.textContent = v.toFixed(dec) + suf; if (p < 1) requestAnimationFrame(step);
+        })(performance.now());
+      });
+    }, { threshold: .6 });
+    els.forEach(function (el) { io2.observe(el); });
+  })();
+
+  // ---- Scroll progress bar and timeline rail ----
+  (function () {
+    var bar = document.querySelector('.progress'), tl = document.querySelector('.timeline'), fill = tl;
+    var jobs = document.querySelectorAll('.job');
+    function onScroll() {
+      var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+      if (bar) bar.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')';
+      if (tl && fill) {
+        var r = tl.getBoundingClientRect(), line = window.innerHeight * .6;
+        var px = Math.max(0, Math.min(r.height - 16, line - r.top - 8));
+        tl.style.setProperty('--fill', px + 'px');
+        jobs.forEach(function (j) { j.classList.toggle('passed', j.getBoundingClientRect().top + 12 < line); });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onScroll); onScroll();
+  })();
+
+  // ---- Pointer spotlight on cards ----
+  document.querySelectorAll('.proj, .skill, .edu-item, .contact-card').forEach(function (c) {
+    c.addEventListener('pointermove', function (e) {
+      var r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
 
 
   // ---- Rooms light up, and the sky takes their colour ----
