@@ -3,467 +3,631 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#12111A">
+<meta name="theme-color" content="#001a60">
 <title>Ava Heng · Data Analyst</title>
-<meta name="description" content="Ava Heng is a First Class Honours Business Analytics graduate and data analyst in Kuala Lumpur, working with SQL, Python, Power BI and Excel.">
+<meta name="description" content="Ava Heng is a First Class Honours Business Analytics graduate and data analyst in Kuala Lumpur, working with SQL, Python, Power BI and data pipelines.">
 <meta property="og:title" content="Ava Heng, Data Analyst">
-<meta property="og:description" content="First Class Honours Business Analytics graduate turning data into decisions.">
+<meta property="og:description" content="First Class Honours Business Analytics graduate turning messy data into clear decisions.">
 <meta property="og:url" content="https://avaheng.my/">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://avaheng.my/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #12111A;
-    --bg-2: #181724;
-    --panel: #1B1A27;
-    --panel-2: #222131;
-    --line: #2C2B3D;
-    --text: #F2F1F7;
-    --text-2: #C2C0D2;
-    --text-3: #8D8BA3;
-
-    --yellow: #F5C451;
-    --blue: #5B95F5;
-    --purple: #A685F2;
-    --green: #52C98C;
-    --red: #EE6A5A;
-
-    --zone: var(--purple);
-    --focus: var(--yellow);
+    --navy: #001a60;
+    --navy-deep: #000f3a;
+    --red: #ef1f35;
+    --red-dark: #8c0d19;
+    --red-soft: #ff4d5f;
+    --black: #0a0c12;
+    --bg-2: #f4f6fb;
+    --muted: #4a5368;
+    --dim: #7a8296;
+    --rule: #E6E9F1;
+    --rule-dark: #D3D9E6;
+    --line: rgba(0, 26, 96, 0.12);
+    --line-soft: rgba(0, 26, 96, 0.08);
+    --shadow: 0 1px 2px rgba(0, 16, 58, .06), 0 12px 32px -12px rgba(0, 16, 58, .16);
+    --shadow-lg: 0 24px 50px -20px rgba(0, 16, 58, .3);
+    --ease: cubic-bezier(.2, .7, .2, 1);
+    --f-head: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --f-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --f-mono: "JetBrains Mono", ui-monospace, monospace;
   }
-  .z-yellow { --zone: var(--yellow); }
-  .z-blue   { --zone: var(--blue); }
-  .z-purple { --zone: var(--purple); }
-  .z-green  { --zone: var(--green); }
-  .z-red    { --zone: var(--red); }
 
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-  body {
-    margin: 0; color: var(--text); background: var(--bg);
-    font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.65;
-  }
-  h1, h2, h3 { font-weight: 600; letter-spacing: -0.015em; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body { margin: 0; background: #fff; color: var(--black); font-family: var(--f-body); font-size: 1rem; line-height: 1.65;
+         -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  ::selection { background: var(--red); color: #fff; }
   a { color: inherit; }
-  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+  :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 4px; }
+  h1, h2, h3, h4 { margin: 0; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 768px) { .wrap { padding: 0 32px; } }
 
-  /* Faint backdrop that shifts toward the colour of the section in view */
-  .sky { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; background: var(--bg); }
-  .sky .glow {
-    position: absolute; width: 80vmax; height: 80vmax; right: -40vmax; top: -40vmax; border-radius: 50%;
-    background: var(--sky, var(--purple)); opacity: .07; filter: blur(120px); transition: background-color 1.2s ease;
+  /* ---------- Brand pieces ---------- */
+  .stripe { height: 4px; background: linear-gradient(90deg, var(--red) 0 22%, var(--red-dark) 22% 40%, var(--navy) 40% 100%); }
+  .label { font-family: var(--f-mono); font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--red);
+           display: inline-flex; align-items: center; gap: 12px; }
+  .label::before { content: ""; width: 28px; height: 2px; background: linear-gradient(90deg, var(--red), var(--red-dark)); }
+  .dark .label { color: #ff6b7a; }
+  .h { font-family: var(--f-head); font-weight: 700; line-height: 1.04; letter-spacing: -0.025em; color: var(--black); }
+  .h em { font-style: normal; color: var(--red); }
+  .dark .h { color: #fff; }
+  .dark .h em { color: var(--red-soft); }
+  .muted { color: var(--muted); }
+  .dim { color: var(--dim); }
+  .dark .muted { color: rgba(225, 231, 247, .74); }
+  .dark .dim { color: rgba(225, 231, 247, .5); }
+  .mono { font-family: var(--f-mono); }
+
+  .dark { position: relative; overflow: hidden; color: #fff;
+          background: radial-gradient(1200px 600px at 85% -10%, rgba(0, 54, 170, .55), transparent 60%), linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); }
+  .grid-bg { position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 60% 30%, #000 25%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 70% at 60% 30%, #000 25%, transparent 75%); }
+  .glow { position: absolute; pointer-events: none; border-radius: 50%; background: radial-gradient(circle, rgba(239, 31, 53, .28), transparent 62%); filter: blur(20px); }
+  .slash { position: absolute; pointer-events: none; width: 120px; top: -10%; bottom: -10%; right: 9%; transform: skewX(-14deg);
+    background: linear-gradient(180deg, var(--red) 0 18%, var(--red-dark) 18% 34%, transparent 34% 38%, rgba(255,255,255,.06) 38% 100%); }
+  @media (max-width: 1024px) { .slash { right: -40px; width: 90px; opacity: .55; } }
+  @media (max-width: 560px) { .slash { display: none; } }
+  .dark > .wrap { position: relative; z-index: 1; }
+
+  .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.5rem; border-radius: 6px; font: inherit; font-size: .875rem; font-weight: 600;
+         text-decoration: none; cursor: pointer; transition: transform .25s var(--ease), box-shadow .25s var(--ease), background-color .25s, border-color .25s, color .25s; }
+  .btn svg { width: 16px; height: 16px; flex: none; }
+  .btn .arrow { transition: transform .25s var(--ease); }
+  .btn:hover .arrow { transform: translateX(3px); }
+  .btn-red { background: var(--red); color: #fff; border: 1px solid var(--red); }
+  .btn-red:hover { background: var(--red-dark); border-color: var(--red-dark); transform: translateY(-1px); box-shadow: 0 12px 28px -10px rgba(239, 31, 53, .55); }
+  .btn-ghost-dark { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.3); }
+  .btn-ghost-dark:hover { background: #fff; color: var(--navy); border-color: #fff; }
+  .copy-email.done { border-color: #7fe0a2; }
+
+  .card { position: relative; overflow: hidden; background: #fff; border: 1px solid var(--line-soft); border-radius: 16px; box-shadow: var(--shadow);
+          transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s; }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--line); }
+  .bar::after { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 4px; background: var(--red); }
+  .bar.bar-dark::after { background: var(--red-dark); }
+  .bar.bar-navy::after { background: var(--navy); }
+  .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips li { font-size: .76rem; font-weight: 500; padding: 6px 12px; border-radius: 4px; background: rgba(0, 26, 96, .06); color: var(--navy); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+  .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; }
+
+  /* ---------- Header ---------- */
+  .site-head { position: sticky; top: 0; z-index: 30; background: #fff; }
+  .head { display: flex; align-items: center; justify-content: space-between; height: 72px; border-bottom: 1px solid var(--rule); }
+  .logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--f-head); font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; color: var(--navy); }
+  .logo .mark { width: 10px; height: 30px; transform: skewX(-14deg); background: linear-gradient(180deg, var(--red) 0 50%, var(--navy) 50%); }
+  .head nav { display: flex; align-items: center; gap: 4px; }
+  .head nav a { text-decoration: none; color: var(--muted); font-size: .9rem; font-weight: 500; padding: 8px 12px; border-radius: 6px; transition: color .2s; }
+  .head nav a:hover { color: var(--red); }
+  .head nav .btn { color: #fff; margin-left: 8px; padding: .6rem 1.1rem; }
+  .head nav .btn:hover { color: #fff; }
+  @media (max-width: 860px) { .head nav a:not(.btn) { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: center; padding: 112px 0 120px; }
+  @media (max-width: 1024px) { .hero-grid { grid-template-columns: 1fr; gap: 56px; padding: 80px 0 88px; } }
+  .hero h1 { font-size: clamp(2.8rem, 6.2vw, 5.2rem); margin: 28px 0; }
+  .hero .lede { font-size: 1.125rem; max-width: 52ch; margin: 0 0 44px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  .glass { position: relative; border: 1px solid rgba(255,255,255,.14); border-radius: 16px; padding: 28px;
+           background: linear-gradient(160deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+           -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 40px 80px -30px rgba(0, 4, 20, .7); }
+  .glass::before { content: ""; position: absolute; left: 28px; top: 0; width: 56px; height: 3px; background: linear-gradient(90deg, var(--red), var(--red-dark)); border-radius: 0 0 3px 3px; }
+  .glass-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; font-family: var(--f-mono); font-size: .74rem; letter-spacing: .12em; }
+  .live { color: #7fe0a2; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+  .pulse { width: 7px; height: 7px; border-radius: 50%; background: #7fe0a2; box-shadow: 0 0 0 0 rgba(127,224,162,.6); animation: pulse 2s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(127,224,162,0); } 100% { box-shadow: 0 0 0 0 rgba(127,224,162,0); } }
+  .glass-title { font-family: var(--f-head); font-weight: 700; font-size: 1.9rem; line-height: 1.15; letter-spacing: -0.02em; }
+  .glass-title span { color: var(--red-soft); }
+  .glass svg.chart { display: block; width: 100%; height: 150px; margin: 20px 0; }
+  .chart-line { fill: none; stroke: var(--red-soft); stroke-width: 2.5; stroke-dasharray: 900; stroke-dashoffset: 900; animation: draw 2.6s .4s var(--ease) forwards; }
+  .chart-area { opacity: 0; animation: fade 1.4s 1.8s forwards; }
+  .chart-dot { fill: var(--red-soft); opacity: 0; animation: fade .6s 2.8s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes fade { to { opacity: 1; } }
+  .glass-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; border-top: 1px solid rgba(255,255,255,.1); padding-top: 16px; }
+  .glass-facts span { display: block; font-family: var(--f-mono); font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 4px; }
+  .glass-facts strong { font-weight: 600; font-size: .95rem; line-height: 1.35; display: block; }
+  @media (max-width: 480px) { .glass-facts { grid-template-columns: 1fr 1fr; } .glass { padding: 24px 20px; } .glass-top { flex-direction: column; align-items: flex-start; } }
+
+  /* ---------- Sections ---------- */
+  section.s { padding: 96px 0; }
+  @media (min-width: 768px) { section.s { padding: 128px 0; } }
+  .s-alt { background: var(--bg-2); }
+  .s-head { max-width: 780px; margin-bottom: 64px; }
+  .s-head h2 { font-size: clamp(2.2rem, 4.4vw, 3.6rem); margin: 20px 0 0; }
+  .s-head p { font-size: 1.05rem; max-width: 60ch; margin: 20px 0 0; }
+
+  /* Metrics */
+  .metrics-s { padding: 80px 0; }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line-soft); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: var(--shadow); }
+  .metric { position: relative; padding: 38px 30px; }
+  .metric + .metric { border-left: 1px solid var(--rule); }
+  .metric::before { content: ""; position: absolute; left: 30px; top: 0; width: 32px; height: 3px; background: var(--red); }
+  .metric strong { display: block; font-family: var(--f-head); font-weight: 700; font-size: 2.9rem; line-height: 1; letter-spacing: -0.03em; color: var(--navy); }
+  .metric sup { font-size: 1.1rem; color: var(--red); vertical-align: top; margin-left: 4px; letter-spacing: 0; }
+  .metric > span { display: block; margin-top: 12px; color: var(--muted); font-size: .92rem; }
+  @media (max-width: 900px) {
+    .metrics { grid-template-columns: 1fr 1fr; }
+    .metric:nth-child(3) { border-left: 0; }
+    .metric:nth-child(n+3) { border-top: 1px solid var(--rule); }
   }
+  @media (max-width: 480px) { .metric { padding: 30px 20px; } .metric::before { left: 20px; } .metric strong { font-size: 2.3rem; } }
 
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
-
-  /* Top bar */
-  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--line); }
-  .logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 600; font-size: 1.05rem; letter-spacing: -0.01em; }
-  .logo svg { width: 26px; height: 26px; }
-  .topbar nav { display: flex; gap: 2px; }
-  .topbar nav a { text-decoration: none; color: var(--text-3); font-size: .925rem; padding: 7px 12px; border-radius: 6px; font-weight: 500; }
-  .topbar nav a:hover { color: var(--text); background: var(--panel); }
-  .topbar nav .cta-nav { color: var(--text); border: 1px solid var(--line); margin-left: 6px; }
-  @media (max-width: 720px) { .topbar nav a:not(.cta-nav) { display: none; } }
-
-  /* Hero */
-  .hero { padding: 88px 0 24px; }
-  .hello { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 28px; font-weight: 500; font-size: .9rem; color: var(--text-2); }
-  .hello i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-  .hero h1 { font-size: clamp(2.8rem, 7.5vw, 5rem); line-height: 1.02; margin: 0; letter-spacing: -0.035em; font-weight: 600; }
-  .spectrum { display: flex; width: min(320px, 70%); height: 4px; margin: 30px 0 30px; border-radius: 2px; overflow: hidden; }
-  .spectrum i { flex: 1; }
-  .hero .lede { font-size: clamp(1.1rem, 2.2vw, 1.3rem); color: var(--text-2); max-width: 40ch; margin: 0 0 36px; line-height: 1.55; }
-  .hero .lede b { color: var(--text); font-weight: 600; }
-
-  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: inherit; font-weight: 500; font-size: .975rem;
-    padding: 11px 18px; border-radius: 8px; cursor: pointer; transition: background-color .15s ease, border-color .15s ease;
-  }
-  .btn svg { width: 17px; height: 17px; flex: none; }
-  .btn-primary { background: var(--text); color: var(--bg); border: 1px solid var(--text); }
-  .btn-primary:hover { background: #fff; }
-  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
-  .btn-ghost:hover { border-color: var(--text-3); background: var(--panel); }
-  .copy-email.done { border-color: var(--green); }
-
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin: 72px 0 0; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); overflow: hidden; }
-  .stats div { padding: 20px 22px; position: relative; }
-  .stats div + div { border-left: 1px solid var(--line); }
-  .stats div::before { content: ""; position: absolute; left: 22px; top: 0; width: 24px; height: 3px; background: var(--c); }
-  .stats b { display: block; font-size: 1.85rem; font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; }
-  .stats span { color: var(--text-3); font-size: .875rem; line-height: 1.4; display: block; margin-top: 4px; }
-  @media (max-width: 760px) {
-    .stats { grid-template-columns: 1fr 1fr; }
-    .stats div:nth-child(3) { border-left: 0; }
-    .stats div:nth-child(n+3) { border-top: 1px solid var(--line); }
-  }
-
-  /* Sections */
-  .room { padding: 88px 0 0; display: grid; grid-template-columns: 220px 1fr; gap: 40px; }
-  .room-head { position: relative; padding-top: 14px; }
-  .room-head::before { content: ""; position: absolute; left: 0; top: 0; width: 28px; height: 3px; background: var(--zone); transition: width .6s ease; }
-  .room.lit .room-head::before { width: 56px; }
-  .room h2 { font-size: 1.6rem; margin: 0; line-height: 1.2; }
-  .room-body { min-width: 0; }
-  @media (max-width: 820px) { .room { grid-template-columns: 1fr; gap: 24px; padding-top: 64px; } }
+  /* Quote band */
+  .quote-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: center; padding: 104px 0; }
+  @media (max-width: 1024px) { .quote-grid { grid-template-columns: 1fr; gap: 40px; padding: 88px 0; } }
+  .quote-grid blockquote { margin: 0; font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: 1.15; }
+  .quote-grid p { margin: 0; font-size: 1.05rem; padding-left: 28px; border-left: 3px solid var(--red); }
 
   /* About */
-  .about p { margin: 0 0 1em; color: var(--text-2); max-width: 64ch; }
-  .about p.big { font-size: 1.25rem; line-height: 1.55; color: var(--text); }
-  .facts { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
-  .facts li { padding: 16px 16px 0 0; }
-  .facts b { display: block; color: var(--text); font-weight: 600; font-size: .975rem; }
-  .facts span { color: var(--text-3); font-size: .9rem; }
-  @media (max-width: 640px) { .facts { grid-template-columns: 1fr; } }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 96px; align-items: start; }
+  @media (max-width: 1024px) { .about-grid { grid-template-columns: 1fr; gap: 56px; } }
+  .about-grid h2 { font-size: clamp(2.4rem, 4.8vw, 4rem); margin: 20px 0 0; }
+  .about-text { margin-top: 32px; }
+  .about-text p { margin: 0 0 1em; }
+  .signoff { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--rule); display: flex; align-items: center; gap: 14px;
+             font-family: var(--f-head); font-weight: 700; font-size: 1.2rem; color: var(--navy); }
+  .signoff i { width: 10px; height: 32px; flex: none; transform: skewX(-14deg); background: linear-gradient(180deg, var(--red) 0 50%, var(--navy) 50%); }
+  .pillars { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (max-width: 1024px) and (min-width: 700px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
+  .pillar { padding: 30px 32px; display: grid; grid-template-columns: 170px 1fr; gap: 8px 24px; align-items: baseline; }
+  .pillar .num { grid-column: 1; }
+  .pillar h3 { grid-column: 1; grid-row: 2; }
+  .pillar p { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  @media (max-width: 1024px) { .pillar { display: block; } }
+  .num { font-family: var(--f-mono); font-size: .68rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+  .pillar h3 { font-size: 1.45rem; margin: 0; }
+  @media (max-width: 1024px) { .pillar h3 { margin: 12px 0; } }
+  .pillar p { margin: 0; font-size: .92rem; }
 
   /* Experience */
-  .timeline { list-style: none; margin: 0; }
-  .job { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 0 0 32px; margin: 0 0 32px; border-bottom: 1px solid var(--line); }
-  .job:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
-  .job .when { font-size: .9rem; color: var(--text-3); padding-top: 4px; }
-  .job h3 { font-size: 1.2rem; margin: 0; line-height: 1.3; }
-  .job .org { color: var(--text-2); font-weight: 500; margin: 2px 0 10px; }
-  .job .org::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--zone); margin-right: 9px; vertical-align: 2px; }
-  .job ul { margin: 0; padding-left: 1.1em; color: var(--text-2); }
-  .job li { margin: 0 0 6px; max-width: 64ch; }
-  @media (max-width: 640px) { .job { grid-template-columns: 1fr; gap: 4px; } }
+  .jobs { display: grid; gap: 20px; }
+  .job { display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 36px 40px; }
+  @media (max-width: 760px) { .job { grid-template-columns: 1fr; gap: 10px; padding: 30px 24px; } }
+  .job .when { font-family: var(--f-mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); padding-top: 6px; }
+  .job .when b { display: block; color: var(--red); font-weight: 500; margin-top: 6px; }
+  .job h3 { font-size: 1.5rem; }
+  .job .org { font-family: var(--f-head); font-weight: 600; font-size: 1.02rem; color: var(--navy); margin: 4px 0 14px; }
+  .job ul { margin: 0; padding-left: 1.1em; color: var(--muted); }
+  .job li { margin-bottom: 6px; max-width: 70ch; }
+  .job li::marker { color: var(--red); }
 
   /* Projects */
-  .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 820px) { .projects { grid-template-columns: 1fr; } }
-  .proj { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; border-top: 3px solid var(--zone); }
-  .proj .meta { font-size: .85rem; color: var(--text-3); margin: 0 0 6px; }
-  .proj h3 { font-size: 1.25rem; margin: 0 0 10px; line-height: 1.25; }
-  .proj p { margin: 0 0 14px; color: var(--text-2); }
-  .proj ul.points { margin: 0 0 18px; padding-left: 1.1em; color: var(--text-2); font-size: .965rem; }
-  .proj ul.points li { margin-bottom: 5px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
-  .proj .tags { margin-top: auto; }
-  .tags li { margin: 0; font-size: .825rem; font-weight: 500; color: var(--text-2); padding: 3px 10px; border-radius: 6px; background: var(--panel-2); border: 1px solid var(--line); }
+  .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 900px) { .projects { grid-template-columns: 1fr; } }
+  .proj { padding: 40px; display: flex; flex-direction: column; }
+  @media (max-width: 560px) { .proj { padding: 32px 24px; } }
+  .proj h3 { font-size: 1.9rem; margin: 16px 0 8px; }
+  .proj .tag { font-family: var(--f-head); font-weight: 600; font-size: 1.05rem; color: var(--red); }
+  .proj.bar-navy .tag { color: var(--navy); }
+  .proj p { margin: 20px 0 0; font-size: .97rem; }
+  .proj ul.points { margin: 18px 0 24px; padding-left: 1.1em; color: var(--muted); font-size: .95rem; }
+  .proj ul.points li { margin-bottom: 6px; }
+  .proj ul.points li::marker { color: var(--red); }
+  .proj .chips { margin-top: auto; }
 
   /* Skills */
-  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 1024px) { .skills { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 640px) { .skills { grid-template-columns: 1fr; } }
-  .skill { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
-  .skill h3 { font-size: 1.025rem; margin: 0 0 12px; }
-  .skill p { margin: 0; color: var(--text-2); font-size: .965rem; }
+  .skill { padding: 32px; }
+  .ico { width: 46px; height: 46px; border-radius: 10px; display: grid; place-items: center; color: #fff; background: var(--navy); transition: background .3s; }
+  .ico svg { width: 22px; height: 22px; }
+  .skill:hover .ico { background: var(--red); }
+  .skill h3 { font-size: 1.3rem; margin: 20px 0 14px; }
+  .skill p { margin: 0; font-size: .95rem; }
 
   /* Education */
-  .edu { display: grid; gap: 16px; }
-  .edu-item { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; }
-  .edu-item .when { font-size: .875rem; color: var(--text-3); }
-  .edu-item h3 { font-size: 1.15rem; margin: 4px 0 2px; line-height: 1.3; }
-  .edu-item p { margin: 0; color: var(--text-2); }
-  .edu-item .gpa { display: inline-block; margin-top: 12px; font-weight: 600; color: var(--text); border: 1px solid var(--zone); padding: 2px 10px; border-radius: 6px; font-size: .875rem; }
-  .edu-item .modules-title { margin: 18px 0 8px; font-size: .875rem; color: var(--text-3); }
-  .awards { list-style: none; margin: 16px 0 0; padding: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
-  .awards li { display: flex; gap: 14px; align-items: center; padding: 14px 20px; }
-  .awards li + li { border-top: 1px solid var(--line); }
-  .awards svg { width: 20px; height: 20px; flex: none; color: var(--yellow); }
-  .awards b { font-weight: 600; }
-  .awards span { color: var(--text-3); font-size: .9rem; margin-left: auto; text-align: right; }
-  @media (max-width: 560px) { .awards li { flex-wrap: wrap; } .awards span { margin-left: 34px; text-align: left; width: 100%; } }
+  .edu-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 900px) { .edu-grid { grid-template-columns: 1fr; } }
+  .degree { padding: 40px; }
+  @media (max-width: 560px) { .degree { padding: 32px 24px; } }
+  .degree h3 { font-size: 1.7rem; margin: 14px 0 6px; }
+  .school { font-family: var(--f-head); font-weight: 600; color: var(--navy); font-size: 1.05rem; }
+  .gpa-row { display: flex; flex-wrap: wrap; gap: 32px; margin: 28px 0; padding: 22px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .gpa-row strong { display: block; font-family: var(--f-head); font-weight: 700; font-size: 2.3rem; line-height: 1; letter-spacing: -0.03em; color: var(--navy); }
+  .gpa-row span { display: block; margin-top: 8px; font-size: .88rem; color: var(--muted); }
+  .mods { font-size: .7rem; letter-spacing: .14em; margin: 0 0 12px; }
+  .side { display: grid; gap: 24px; }
+  .found { padding: 32px; }
+  .found h3 { font-size: 1.3rem; margin: 12px 0 4px; }
+  .found .gpa { margin-top: 14px; font-size: .9rem; color: var(--muted); }
+  .found .gpa b { color: var(--navy); font-family: var(--f-head); font-size: 1.15rem; }
+  .awards { padding: 32px; }
+  .awards h3 { font-size: 1.3rem; margin: 12px 0 18px; }
+  .awards ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+  .awards li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  .awards li i { width: 8px; height: 22px; margin: 1px 0 0 4px; transform: skewX(-14deg); background: linear-gradient(180deg, var(--red) 0 50%, var(--navy) 50%); }
+  .awards b { display: block; font-weight: 600; line-height: 1.4; }
+  .awards li span { font-size: .85rem; color: var(--dim); }
 
-  /* Contact */
-  .contact-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 32px; }
-  .contact-card p { color: var(--text-2); margin: 0 0 24px; max-width: 48ch; font-size: 1.1rem; }
+  /* CTA */
+  .cta { text-align: center; }
+  .cta-inner { max-width: 860px; margin: 0 auto; padding: 112px 0; }
+  .cta h2 { font-size: clamp(2.4rem, 5.2vw, 4.2rem); margin: 24px 0; }
+  .cta p { font-size: 1.125rem; margin: 0 0 40px; }
+  .cta .actions { justify-content: center; }
 
-  footer { margin-top: 88px; padding: 28px 0 48px; border-top: 1px solid var(--line); color: var(--text-3); font-size: .875rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-  footer a { color: var(--text-3); }
+  /* Footer */
+  footer { background: var(--bg-2); border-top: 1px solid var(--rule); }
+  .foot { display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; gap: 48px; padding: 64px 0 56px; }
+  @media (max-width: 760px) { .foot { grid-template-columns: 1fr; gap: 36px; } }
+  .foot p { margin: 20px 0 0; max-width: 36ch; font-size: .95rem; }
+  .foot h4 { font-family: var(--f-mono); font-size: .7rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--navy); margin-bottom: 16px; }
+  .foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: .95rem; }
+  .foot ul a { color: var(--muted); text-decoration: none; transition: color .2s; }
+  .foot ul a:hover { color: var(--red); }
+  .foot-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 28px 0 36px; border-top: 1px solid var(--rule-dark); font-size: .82rem; color: var(--dim); }
 
-  /* Scroll progress in the five colours */
-  .progress { position: fixed; left: 0; top: 0; height: 3px; width: 100%; z-index: 50; transform-origin: 0 50%; transform: scaleX(0);
-              background: linear-gradient(90deg, var(--yellow), var(--blue), var(--purple), var(--green), var(--red)); }
-
-  /* Hero layout and flowing stream chart */
-  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
-  .hero-art { position: relative; aspect-ratio: 1 / 1; max-width: 480px; justify-self: end; width: 100%; }
-  .hero-art::before { content: ""; position: absolute; inset: 12% 8%; border-radius: 50%;
-    background: radial-gradient(circle, rgba(166,133,242,.28), transparent 70%); filter: blur(30px); }
-  .hero-art svg { position: relative; width: 100%; height: 100%; display: block; }
-  .hero-art .axis { stroke: var(--line); stroke-width: 1; }
-  .hero-art .tick { fill: var(--text-3); font: 500 11px "IBM Plex Sans", sans-serif; }
-  @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 8px; }
-    .hero-art { justify-self: center; max-width: 420px; aspect-ratio: 4 / 3; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .chart-line { stroke-dashoffset: 0; animation: none; }
+    .chart-area, .chart-dot { opacity: 1; animation: none; }
+    .pulse { animation: none; }
+    .card, .btn { transition: none; }
   }
-
-  /* Timeline rail that fills as you read */
-  .timeline { position: relative; padding-left: 32px; }
-  .timeline::before { content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
-  .timeline::after { content: ""; position: absolute; left: 5px; top: 8px; width: 2px; height: var(--fill, 0px); background: linear-gradient(var(--blue), var(--purple)); border-radius: 1px; }
-  .job { position: relative; }
-  .job::before { content: ""; position: absolute; left: -32px; top: 6px; width: 12px; height: 12px; border-radius: 50%;
-    background: var(--bg); border: 2px solid var(--line); transition: background-color .4s ease, border-color .4s ease, box-shadow .4s ease; }
-  .job.passed::before { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 0 4px rgba(91,149,245,.18); }
-
-  /* Cards respond to the pointer */
-  .proj, .skill, .edu-item, .contact-card { position: relative; overflow: hidden; transition: transform .25s ease, border-color .25s ease; }
-  .proj::after, .skill::after, .edu-item::after, .contact-card::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s ease;
-    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--zone) 16%, transparent), transparent 70%);
-  }
-  .proj:hover, .skill:hover, .edu-item:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--zone) 55%, var(--line)); }
-  .proj:hover::after, .skill:hover::after, .edu-item:hover::after, .contact-card:hover::after { opacity: 1; }
-  .proj > *, .skill > *, .edu-item > *, .contact-card > * { position: relative; z-index: 1; }
-
-
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .progress { display: none; } }
-  @media print {
-    body { background: #fff; color: #000; }
-    .sky, .topbar nav, .actions { display: none; }
-  }
+  @media print { .site-head, .actions, .slash, .glow, .grid-bg { display: none; } .reveal { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
 
-<div class="progress" aria-hidden="true"></div>
-<div class="sky" aria-hidden="true"><div class="glow"></div></div>
-
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="medal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></g></symbol>
-  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></g></symbol>
   <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm7 0h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.62 0-1.86 1.26-1.86 2.56v4.92H10v-11Z"/></symbol>
 </svg>
 
-<div class="wrap">
-  <header class="topbar">
-    <a class="logo" href="#top" aria-label="Ava Heng, back to top">
-      <svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="6" fill="#222131" stroke="#2C2B3D"/><rect x="5" y="15" width="3" height="6" rx="1" fill="#F5C451"/><rect x="8.5" y="11" width="3" height="10" rx="1" fill="#5B95F5"/><rect x="12" y="7" width="3" height="14" rx="1" fill="#A685F2"/><rect x="15.5" y="10" width="3" height="11" rx="1" fill="#52C98C"/><rect x="19" y="5" width="3" height="16" rx="1" fill="#EE6A5A"/></svg>
-      Ava Heng
-    </a>
+<header class="site-head">
+  <div class="stripe"></div>
+  <div class="wrap head">
+    <a class="logo" href="#top" aria-label="Ava Heng, back to top"><span class="mark" aria-hidden="true"></span>Ava Heng</a>
     <nav aria-label="Sections">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
       <a href="#education">Education</a>
-      <a class="cta-nav" href="#contact">Contact</a>
+      <a class="btn btn-red" href="#contact">Contact</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main id="top">
-    <section class="hero" data-zone="purple">
+<main id="top">
+  <!-- Hero -->
+  <section class="dark hero">
+    <div class="grid-bg"></div>
+    <div class="slash"></div>
+    <div class="glow" style="width:760px;height:760px;left:-280px;bottom:-380px"></div>
+    <div class="wrap">
       <div class="hero-grid">
-      <div class="hero-text">
-        <p class="hello"><i></i>Open to data analyst roles</p>
-        <h1>Ava Heng<br>Data Analyst</h1>
-        <div class="spectrum" aria-hidden="true"><i style="background:var(--yellow)"></i><i style="background:var(--blue)"></i><i style="background:var(--purple)"></i><i style="background:var(--green)"></i><i style="background:var(--red)"></i></div>
-        <p class="lede"><b>First Class Honours Business Analytics graduate</b> in Kuala Lumpur. I use SQL, Python, Power BI and Excel to turn messy data into clear, reliable decisions.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="mailto:avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email me</a>
-          <button class="btn btn-ghost copy-email" type="button" data-email="avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-copy"/></svg><span aria-live="polite">Copy email</span></button>
-          <a class="btn btn-ghost" href="https://www.linkedin.com/in/ava-heng-83106724a" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
-        </div>
-      </div>
-      <div class="hero-art" aria-hidden="true"><svg id="stream" viewBox="0 0 480 480" preserveAspectRatio="xMidYMid meet"></svg></div>
-      </div>
-      <div class="stats" aria-label="Highlights">
-        <div style="--c:var(--yellow)"><b data-count="3.74" data-dec="2">3.74</b><span>CGPA, First Class Honours</span></div>
-        <div style="--c:var(--blue)"><b data-count="12">12</b><span>A+ grades, including Big Data and Finance Analytics</span></div>
-        <div style="--c:var(--purple)"><b data-count="2" data-suffix="×">2×</b><span>Dean’s List, Sunway University</span></div>
-        <div style="--c:var(--green)"><b data-count="3">3</b><span>Jeffrey Cheah awards and scholarships</span></div>
-      </div>
-    </section>
-
-    <section class="room z-yellow" id="about" data-zone="yellow">
-      <div class="room-head"><h2>About</h2></div>
-      <div class="room-body">
-      <div class="about">
         <div>
-          <p class="big">I graduated from Sunway University with First Class Honours in Business Analytics, and I like the whole journey from raw data to a decision someone can act on.</p>
-          <p>At Yinson Greentech’s ChargEV I analysed operational and user data with SQL and Power BI, built dashboards to monitor the business, and used K-Means and KNN to segment EV drivers by how they charge. Outside of analytics I’ve worked with company secretaries at Boardroom Corporate Services, which taught me to write precisely for boards, and I’ve tutored IGCSE Additional Mathematics, which taught me to explain hard ideas simply.</p>
-          <p>I’m looking for a data analyst role where I can help a team make better decisions with its data.</p>
+          <span class="label reveal">Data Analyst · Kuala Lumpur</span>
+          <h1 class="h reveal d1">Turning messy data into <em>clear decisions.</em></h1>
+          <p class="lede muted reveal d2">I’m Ava Heng, a First Class Honours Business Analytics graduate. I work with SQL, Python, Power BI and data pipelines to turn raw data into dashboards and decisions people can act on.</p>
+          <div class="actions reveal d3">
+            <a class="btn btn-red" href="mailto:avaheng2004@hotmail.com">Email me <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <button class="btn btn-ghost-dark copy-email" type="button" data-email="avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-copy"/></svg><span aria-live="polite">Copy email</span></button>
+            <a class="btn btn-ghost-dark" href="https://www.linkedin.com/in/ava-heng-83106724a" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
+          </div>
         </div>
-        <ul class="facts">
-          <li><b>Based in Kuala Lumpur</b><span>Open to data analyst roles</span></li>
-          <li><b>English and Chinese</b><span>Fluent, spoken and written</span></li>
-          <li><b>SQL, Python, Power BI, Excel</b><span>My everyday toolkit</span></li>
-        </ul>
-      </div>
-      </div>
-    </section>
 
-    <section class="room z-blue" id="experience" data-zone="blue">
-      <div class="room-head"><h2>Experience</h2></div>
-      <div class="room-body">
-      <ol class="timeline">
-        <li class="job">
-          <span class="when">Jan 2025 – Mar 2025</span>
-          <div>
-          <h3>Analytics Intern</h3>
-          <p class="org">Yinson Greentech · ChargEV</p>
-          <ul>
-            <li>Processed and analysed operational and user data with SQL and Power BI to support reporting and business decisions</li>
-            <li>Designed and built multiple Power BI dashboards to monitor business performance and user activity</li>
-            <li>Segmented charging behaviour with K-Means and KNN to identify distinct user groups and usage patterns</li>
-          </ul>
+        <div class="glass reveal d2" aria-hidden="true">
+          <div class="glass-top"><span class="muted">AVA HENG · PROFILE</span><span class="live"><span class="pulse"></span>OPEN TO ROLES</span></div>
+          <div class="glass-title">Raw data → <span>decisions</span></div>
+          <svg class="chart" viewBox="0 0 400 150" preserveAspectRatio="none">
+            <defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff4d5f" stop-opacity=".32"/><stop offset="1" stop-color="#ff4d5f" stop-opacity="0"/></linearGradient></defs>
+            <g stroke="rgba(255,255,255,.06)" stroke-width="1"><line x1="0" y1="37" x2="400" y2="37"/><line x1="0" y1="75" x2="400" y2="75"/><line x1="0" y1="112" x2="400" y2="112"/></g>
+            <path class="chart-area" fill="url(#fill)" d="M0,130 L30,124 L60,127 L95,114 L130,118 L165,100 L200,104 L235,84 L270,88 L305,62 L340,50 L370,36 L400,24 L400,150 L0,150 Z"/>
+            <path class="chart-line" d="M0,130 L30,124 L60,127 L95,114 L130,118 L165,100 L200,104 L235,84 L270,88 L305,62 L340,50 L370,36 L400,24"/>
+            <circle class="chart-dot" cx="396" cy="24" r="4"/>
+          </svg>
+          <div class="glass-facts">
+            <div><span class="dim">Degree</span><strong>First Class Honours</strong></div>
+            <div><span class="dim">Toolkit</span><strong>SQL · Power BI · Python</strong></div>
+            <div><span class="dim">Based in</span><strong>Kuala Lumpur</strong></div>
           </div>
-        </li>
-        <li class="job now">
-          <span class="when">Jan 2024 – present</span>
-          <div>
-          <h3>Company Secretarial Team</h3>
-          <p class="org">Boardroom Corporate Services Sdn. Bhd.</p>
-          <ul>
-            <li>Draft board and committee meeting minutes in line with corporate governance requirements</li>
-            <li>Work with company secretaries to keep documented decisions clear, accurate and consistent</li>
-          </ul>
-          </div>
-        </li>
-        <li class="job now">
-          <span class="when">Sep 2023 – present</span>
-          <div>
-          <h3>Additional Mathematics Tutor</h3>
-          <p class="org">Freelance, online</p>
-          <ul>
-            <li>Teach weekly one-to-one online lessons for IGCSE Additional Mathematics students</li>
-            <li>Break complex concepts into steps that build understanding and problem-solving skill</li>
-          </ul>
-          </div>
-        </li>
-        <li class="job">
-          <span class="when">Aug 2022 – Aug 2025</span>
-          <div>
-          <h3>Student Representative, BBA August 2022 intake</h3>
-          <p class="org">Sunway University</p>
-          <ul>
-            <li>Collected student feedback on subjects and lecturers each semester and reported findings in student–staff meetings</li>
-          </ul>
-          </div>
-        </li>
-      </ol>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="room z-blue" id="projects" data-zone="blue">
-      <div class="room-head"><h2>Projects</h2></div>
-      <div class="room-body">
+  <!-- Highlights -->
+  <section class="metrics-s">
+    <div class="wrap">
+      <div class="metrics reveal" aria-label="Highlights">
+        <div class="metric"><strong><span data-count="3.74" data-dec="2">3.74</span></strong><span>CGPA, First Class Honours</span></div>
+        <div class="metric"><strong><span data-count="12">12</span><sup>A+</sup></strong><span>Top grades, including Big Data and Finance Analytics</span></div>
+        <div class="metric"><strong><span data-count="2">2</span><sup>×</sup></strong><span>Dean’s List, Sunway University</span></div>
+        <div class="metric"><strong><span data-count="3">3</span></strong><span>Jeffrey Cheah awards and scholarships</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote band -->
+  <section class="dark">
+    <div class="glow" style="width:600px;height:600px;right:-220px;top:-260px"></div>
+    <div class="wrap">
+      <div class="quote-grid">
+        <blockquote class="h reveal">Good analysis starts with <em>data you can trust.</em></blockquote>
+        <p class="muted reveal d2">Most of the value in analytics comes before the chart: cleaning, validating and classifying data so the numbers mean the same thing every time. That’s the part I like doing well.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="s" id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <span class="label">About me</span>
+        <h2 class="h">Raw data to <em>real decisions.</em></h2>
+        <div class="about-text muted">
+          <p>I graduated from Sunway University with First Class Honours in Business Analytics. At Yinson Greentech’s ChargEV I analysed operational and user data with SQL and Power BI, built dashboards to monitor the business, and used K-Means and KNN to segment EV drivers by how they charge.</p>
+          <p>I’ve also worked with company secretaries at Boardroom Corporate Services, which taught me to write precisely for boards, and tutored IGCSE Additional Mathematics, which taught me to explain hard ideas simply. I’m fluent in English and Chinese.</p>
+        </div>
+        <div class="signoff"><i aria-hidden="true"></i>Open to data analyst roles.</div>
+      </div>
+      <div class="pillars">
+        <div class="card pillar reveal"><span class="num">01</span><h3 class="h">Prepare</h3><p class="muted">Clean, validate and model raw data with SQL, Python and pipelines like Airflow and Airbyte.</p></div>
+        <div class="card pillar reveal d1"><span class="num">02</span><h3 class="h">Analyse</h3><p class="muted">Find the pattern, from segmentation with K-Means to period-on-period changes in ownership.</p></div>
+        <div class="card pillar reveal d2"><span class="num">03</span><h3 class="h">Communicate</h3><p class="muted">Turn findings into Power BI dashboards and plain-language recommendations people can act on.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="s s-alt" id="experience">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <span class="label">Experience</span>
+        <h2 class="h">Where I’ve <em>worked.</em></h2>
+      </div>
+      <div class="jobs">
+        <article class="card bar job reveal">
+          <div class="when">Jan 2025 – Mar 2025</div>
+          <div>
+            <h3 class="h">Analytics Intern</h3>
+            <p class="org">Yinson Greentech · ChargEV</p>
+            <ul>
+              <li>Processed and analysed operational and user data with SQL and Power BI to support reporting and business decisions</li>
+              <li>Designed and built multiple Power BI dashboards to monitor business performance and user activity</li>
+              <li>Segmented charging behaviour with K-Means and KNN to identify distinct user groups and usage patterns</li>
+            </ul>
+          </div>
+        </article>
+        <article class="card bar bar-dark job reveal">
+          <div class="when">Jan 2024 – present<b>Current</b></div>
+          <div>
+            <h3 class="h">Company Secretarial Team</h3>
+            <p class="org">Boardroom Corporate Services Sdn. Bhd.</p>
+            <ul>
+              <li>Draft board and committee meeting minutes in line with corporate governance requirements</li>
+              <li>Work with company secretaries to keep documented decisions clear, accurate and consistent</li>
+            </ul>
+          </div>
+        </article>
+        <article class="card bar bar-navy job reveal">
+          <div class="when">Sep 2023 – present<b>Current</b></div>
+          <div>
+            <h3 class="h">Additional Mathematics Tutor</h3>
+            <p class="org">Freelance, online</p>
+            <ul>
+              <li>Teach weekly one-to-one online lessons for IGCSE Additional Mathematics students</li>
+              <li>Break complex concepts into steps that build understanding and problem-solving skill</li>
+            </ul>
+          </div>
+        </article>
+        <article class="card bar bar-navy job reveal">
+          <div class="when">Aug 2022 – Aug 2025</div>
+          <div>
+            <h3 class="h">Student Representative</h3>
+            <p class="org">Sunway University · BBA August 2022 intake</p>
+            <ul>
+              <li>Collected student feedback on subjects and lecturers each semester and reported findings in student–staff meetings</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="s" id="projects">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <span class="label">Projects</span>
+        <h2 class="h">Things I’ve <em>built.</em></h2>
+        <p class="muted">Two projects that took raw, messy data all the way to a dashboard people use to make decisions.</p>
+      </div>
       <div class="projects">
-        <article class="proj">
-          <p class="meta">Equity advisory · Full-stack data project</p>
-              <h3>Shareholding analysis platform</h3>
-              <p>Analysts spent hours classifying thousands of holders in raw shareholder registers each period. I built a web platform that does it automatically and turns each register into a client-ready dashboard.</p>
+        <article class="card bar proj reveal">
+          <span class="num">01 · Equity advisory</span>
+          <h3 class="h">Shareholding analysis platform</h3>
+          <div class="tag">From raw register to client report</div>
+          <p class="muted">Analysts spent hours classifying thousands of holders in raw shareholder registers each period. I built a web platform that does it automatically and turns each register into a client-ready dashboard.</p>
           <ul class="points">
-                <li>Upload Excel or CSV registers; automated workflows clean and validate them</li>
-                <li>A fund dictionary maps each holder to substantial shareholder, management, local fund, foreign fund or retail</li>
-                <li>Dashboards show the ownership breakdown, the GLC, local and foreign split over time, and top buyers and sellers between periods</li>
-                <li>One-click PDF export for client reports</li>
-              </ul>
-              <ul class="tags"><li>SQL</li><li>Excel</li><li>n8n</li><li>TypeScript</li><li>Next.js</li><li>Supabase</li></ul>
+            <li>Upload Excel or CSV registers; automated workflows clean and validate them</li>
+            <li>A fund dictionary maps each holder to substantial shareholder, management, local fund, foreign fund or retail</li>
+            <li>Dashboards show the ownership breakdown, the GLC, local and foreign split over time, and top buyers and sellers between periods</li>
+            <li>One-click PDF export for client reports</li>
+          </ul>
+          <ul class="chips"><li>SQL</li><li>Excel</li><li>n8n</li><li>TypeScript</li><li>Next.js</li><li>Supabase</li></ul>
         </article>
-        <article class="proj">
-          <p class="meta">Yinson Greentech ChargEV · Internship</p>
-              <h3>EV charging behaviour segmentation</h3>
-              <p>To understand who uses the charging network and how, I clustered members by where, when and how they charge, and turned the results into personas the business could plan around.</p>
+        <article class="card bar bar-navy proj reveal d1">
+          <span class="num">02 · Yinson Greentech ChargEV</span>
+          <h3 class="h">EV charging behaviour segmentation</h3>
+          <div class="tag">Who charges, where and when</div>
+          <p class="muted">To understand who uses the charging network and how, I clustered members by where, when and how they charge, and turned the results into personas the business could plan around.</p>
           <ul class="points">
-                <li>Prepared operational and user data with SQL, keeping only members with more than two completed sessions</li>
-                <li>Applied K-Means and KNN to find six charging personas, from workplace AC chargers to interstate business travellers</li>
-                <li>Profiled each persona on distance, DC versus AC use, weekend and working-hour patterns</li>
-                <li>Built Power BI dashboards to track performance and user activity</li>
-              </ul>
-              <ul class="tags"><li>SQL</li><li>K-Means</li><li>KNN</li><li>Power BI</li></ul>
+            <li>Prepared operational and user data with SQL, keeping only members with more than two completed sessions</li>
+            <li>Applied K-Means and KNN to find six charging personas, from workplace AC chargers to interstate business travellers</li>
+            <li>Profiled each persona on distance, DC versus AC use, weekend and working-hour patterns</li>
+            <li>Built Power BI dashboards to track performance and user activity</li>
+          </ul>
+          <ul class="chips"><li>SQL</li><li>K-Means</li><li>KNN</li><li>Power BI</li></ul>
         </article>
       </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="room z-green" id="skills" data-zone="green">
-      <div class="room-head"><h2>Skills</h2></div>
-      <div class="room-body">
+  <!-- Skills -->
+  <section class="s s-alt" id="skills">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <span class="label">Skills</span>
+        <h2 class="h">Tools I <em>work with.</em></h2>
+      </div>
       <div class="skills">
-        <div class="skill">
-          <h3>Analysis and dashboards</h3>
-          <ul class="tags"><li>SQL</li><li>Power BI</li><li>Power BI data modelling</li><li>Row-level security</li><li>Tableau</li><li>Excel (pivot tables, formulas)</li><li>IBM SPSS</li></ul>
+        <div class="card skill reveal">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+          <h3 class="h">Analysis and dashboards</h3>
+          <ul class="chips"><li>SQL</li><li>Power BI</li><li>Power BI data modelling</li><li>Row-level security</li><li>Tableau</li><li>Excel (pivot tables, formulas)</li><li>IBM SPSS</li></ul>
         </div>
-        <div class="skill">
-          <h3>Data pipelines and automation</h3>
-          <ul class="tags"><li>Apache Airflow</li><li>Airbyte</li><li>n8n</li><li>Google BigQuery</li><li>Supabase</li></ul>
+        <div class="card skill reveal d1">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+          <h3 class="h">Data pipelines and automation</h3>
+          <ul class="chips"><li>Apache Airflow</li><li>Airbyte</li><li>n8n</li><li>Google BigQuery</li><li>Supabase</li></ul>
         </div>
-        <div class="skill">
-          <h3>Coding and version control</h3>
-          <ul class="tags"><li>Python</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li><li>GitHub</li><li>Bitbucket</li><li>VS Code</li><li>Google Colab</li><li>RStudio</li><li>Databricks</li></ul>
+        <div class="card skill reveal d2">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="m14 4-4 16"/></svg></div>
+          <h3 class="h">Coding and version control</h3>
+          <ul class="chips"><li>Python</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li><li>GitHub</li><li>Bitbucket</li><li>VS Code</li><li>Google Colab</li><li>RStudio</li><li>Databricks</li></ul>
         </div>
-        <div class="skill">
-          <h3>Microsoft Office</h3>
-          <ul class="tags"><li>Excel</li><li>Word</li><li>PowerPoint</li><li>Outlook</li><li>Teams</li></ul>
+        <div class="card skill reveal">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <h3 class="h">Microsoft Office</h3>
+          <ul class="chips"><li>Excel</li><li>Word</li><li>PowerPoint</li><li>Outlook</li><li>Teams</li></ul>
         </div>
-        <div class="skill">
-          <h3>Business sense</h3>
-          <p>Comfortable with financial concepts, performance metrics and reporting. I look for the pattern in the data and turn it into a recommendation.</p>
+        <div class="card skill reveal d1">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+          <h3 class="h">Business sense</h3>
+          <p class="muted">Comfortable with financial concepts, performance metrics and reporting. I look for the pattern in the data and turn it into a recommendation.</p>
         </div>
-        <div class="skill">
-          <h3>Communication</h3>
-          <p>I explain analysis to non-technical people, work well on my own or in a team, and speak and write English and Chinese fluently.</p>
+        <div class="card skill reveal d2">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12Z"/></svg></div>
+          <h3 class="h">Communication</h3>
+          <p class="muted">I explain analysis to non-technical people, work well on my own or in a team, and speak and write English and Chinese fluently.</p>
         </div>
       </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="room z-purple" id="education" data-zone="purple">
-      <div class="room-head"><h2>Education</h2></div>
-      <div class="room-body">
-      <div class="edu">
-        <div class="edu-item">
-          <span class="when">Aug 2022 – Jan 2026</span>
-          <h3>Bachelor of Business Analytics (Honours), First Class</h3>
-          <p>Sunway University</p>
-          <span class="gpa">CGPA 3.74</span>
-          <p class="modules-title">A+ in</p>
-          <ul class="tags">
+  <!-- Education -->
+  <section class="s" id="education">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <span class="label">Education and awards</span>
+        <h2 class="h">What I <em>studied.</em></h2>
+      </div>
+      <div class="edu-grid">
+        <article class="card bar degree reveal">
+          <span class="num">Aug 2022 – Jan 2026</span>
+          <h3 class="h">Bachelor of Business Analytics (Honours)</h3>
+          <div class="school">Sunway University</div>
+          <div class="gpa-row">
+            <div><strong>First Class</strong><span>Honours</span></div>
+            <div><strong>3.74</strong><span>CGPA</span></div>
+            <div><strong>12</strong><span>A+ grades</span></div>
+          </div>
+          <p class="mods dim mono">A+ IN</p>
+          <ul class="chips">
             <li>Big Data Analytics and Visualisation</li><li>Finance Analytics</li><li>Web and Social Media Analytics</li>
             <li>Business Database Systems</li><li>Quantitative Methods for Business</li><li>Business Statistics</li>
             <li>Business Information Systems Development</li>
           </ul>
+        </article>
+        <div class="side">
+          <article class="card bar bar-navy found reveal d1">
+            <span class="num">Apr 2021 – Feb 2022</span>
+            <h3 class="h">Foundation in Arts</h3>
+            <div class="school">Sunway College</div>
+            <div class="gpa">CGPA <b>3.77</b></div>
+          </article>
+          <article class="card bar bar-dark awards reveal d2">
+            <span class="num">Honours and awards</span>
+            <h3 class="h">Recognition</h3>
+            <ul>
+              <li><i aria-hidden="true"></i><div><b>Tan Sri Sir Jeffrey Cheah Scholastic Award</b><span>For outstanding academic results</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>Dean’s List Award, twice</b><span>Apr–Aug 2024 and Sep 2024–Jan 2025</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>Jeffrey Cheah ACE Scholarship</b><span>2022 – 2025</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>Jeffrey Cheah Entrance Scholarship</b><span>2021</span></div></li>
+            </ul>
+          </article>
         </div>
-        <div class="edu-item">
-          <span class="when">Apr 2021 – Feb 2022</span>
-          <h3>Foundation in Arts</h3>
-          <p>Sunway College</p>
-          <span class="gpa">CGPA 3.77</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="dark cta" id="contact">
+    <div class="glow" style="width:800px;height:800px;left:50%;top:60%;transform:translate(-50%,-50%)"></div>
+    <div class="wrap">
+      <div class="cta-inner">
+        <span class="label reveal">Open to data analyst roles</span>
+        <h2 class="h reveal d1">Let’s turn your data into <em>decisions.</em></h2>
+        <p class="muted reveal d2">I’m looking for a data analyst role in Kuala Lumpur. Email is the fastest way to reach me.</p>
+        <div class="actions reveal d3">
+          <a class="btn btn-red" href="mailto:avaheng2004@hotmail.com">avaheng2004@hotmail.com <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <button class="btn btn-ghost-dark copy-email" type="button" data-email="avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-copy"/></svg><span aria-live="polite">Copy email</span></button>
+          <a class="btn btn-ghost-dark" href="https://www.linkedin.com/in/ava-heng-83106724a" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
+          <a class="btn btn-ghost-dark" href="https://github.com/avaheng1105" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
-      <ul class="awards" aria-label="Honours and awards">
-        <li class="top"><svg aria-hidden="true"><use href="#medal"/></svg><b>Tan Sri Sir Jeffrey Cheah Scholastic Award</b><span>For outstanding academic results</span></li>
-        <li><svg aria-hidden="true"><use href="#medal"/></svg><b>Dean’s List Award, twice</b><span>Apr–Aug 2024 and Sep 2024–Jan 2025</span></li>
-        <li><svg aria-hidden="true"><use href="#medal"/></svg><b>Jeffrey Cheah ACE Scholarship</b><span>2022 – 2025</span></li>
-        <li><svg aria-hidden="true"><use href="#medal"/></svg><b>Jeffrey Cheah Entrance Scholarship</b><span>2021</span></li>
-      </ul>
-      </div>
-    </section>
+    </div>
+  </section>
+</main>
 
-    <section class="room z-red" id="contact" data-zone="red">
-      <div class="room-head"><h2>Contact</h2></div>
-      <div class="room-body contact-card">
-      <p>I’m looking for a data analyst role in Kuala Lumpur. Email is the fastest way to reach me.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="mailto:avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>avaheng2004@hotmail.com</a>
-        <button class="btn btn-ghost copy-email" type="button" data-email="avaheng2004@hotmail.com"><svg aria-hidden="true"><use href="#i-copy"/></svg><span aria-live="polite">Copy email</span></button>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/ava-heng-83106724a" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
-        <a class="btn btn-ghost" href="https://github.com/avaheng1105" target="_blank" rel="noopener">GitHub</a>
+<footer>
+  <div class="stripe"></div>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="#top"><span class="mark" aria-hidden="true"></span>Ava Heng</a>
+        <p class="muted">Data analyst in Kuala Lumpur. First Class Honours in Business Analytics, Sunway University.</p>
       </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+        </ul>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    <span>© <span id="yr">2026</span> Ava Heng Xiao Nan</span>
-    <a href="#top">Back to top</a>
-  </footer>
-</div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:avaheng2004@hotmail.com">avaheng2004@hotmail.com</a></li>
+          <li><a href="https://www.linkedin.com/in/ava-heng-83106724a" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/avaheng1105" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© <span id="yr">2026</span> Ava Heng Xiao Nan</span><span>Raw data to real decisions.</span></div>
+  </div>
+</footer>
 
 <script>
 (function () {
   document.getElementById('yr').textContent = new Date().getFullYear();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---- Copy email ----
+  // Copy email
   document.querySelectorAll('.copy-email').forEach(function (b) {
     var label = b.querySelector('span');
     b.addEventListener('click', function () {
@@ -484,128 +648,30 @@
     });
   });
 
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var sky = document.querySelector('.sky');
-  var COLORS = { yellow: '#F5C451', blue: '#5B95F5', purple: '#A685F2', green: '#52C98C', red: '#EE6A5A' };
+  // Fade sections in as they scroll into view
+  var items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window) || reduce) {
+    items.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  }
 
-  // ---- Flowing stream chart in the hero ----
-  (function () {
-    var svg = document.getElementById('stream'); if (!svg) return;
-    var NS = 'http://www.w3.org/2000/svg', W = 480, H = 480, PAD = 36, N = 28;
-    var order = ['yellow', 'blue', 'purple', 'green', 'red'];
-    var g = document.createElementNS(NS, 'g'); svg.appendChild(g);
-    var ax = document.createElementNS(NS, 'line');
-    ax.setAttribute('class', 'axis'); ax.setAttribute('x1', PAD); ax.setAttribute('x2', W - PAD); ax.setAttribute('y1', H - 22); ax.setAttribute('y2', H - 22);
-    svg.appendChild(ax);
-    ['Q1', 'Q2', 'Q3', 'Q4'].forEach(function (q, i) {
-      var t = document.createElementNS(NS, 'text'); t.setAttribute('class', 'tick');
-      t.setAttribute('x', PAD + (W - 2 * PAD) * (i + .5) / 4); t.setAttribute('y', H - 6); t.setAttribute('text-anchor', 'middle'); t.textContent = q;
-      svg.appendChild(t);
-    });
-    var paths = order.map(function (k) {
-      var p = document.createElementNS(NS, 'path');
-      p.setAttribute('fill', COLORS[k]); p.setAttribute('fill-opacity', '.92');
-      p.setAttribute('stroke', '#12111A'); p.setAttribute('stroke-width', '1.5'); g.appendChild(p); return p;
-    });
-    var seeds = order.map(function (_, i) { return [1.3 + i * .37, 2.1 + i * .21, .7 + i * .53, i * 1.7]; });
-    function val(li, x, t) {
-      var s = seeds[li];
-      return 1 + .8 * Math.sin(x * s[0] + t * .6 + s[3]) * .5 + .5 * Math.sin(x * s[1] - t * .45 + s[3] * 2) * .5 + .35 * Math.cos(x * s[2] + t * .3);
-    }
-    function smooth(pts) {
-      var d = 'M' + pts[0][0].toFixed(1) + ',' + pts[0][1].toFixed(1);
-      for (var i = 0; i < pts.length - 1; i++) {
-        var p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
-        d += ' C' + (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1) + ',' + (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1) +
-             ' ' + (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1) + ',' + (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1) +
-             ' ' + p2[0].toFixed(1) + ',' + p2[1].toFixed(1);
-      }
-      return d;
-    }
-    function draw(t) {
-      var xs = [], layers = order.map(function () { return []; }), tot = [];
-      for (var i = 0; i < N; i++) {
-        var u = i / (N - 1), sum = 0;
-        xs.push(PAD + u * (W - 2 * PAD));
-        for (var l = 0; l < order.length; l++) { var v = Math.max(.15, val(l, u * 3.2, t)) * (0.55 + u * 0.75); layers[l].push(v); sum += v; }
-        tot.push(sum);
-      }
-      var max = 0; tot.forEach(function (v) { max = Math.max(max, v); });
-      var scale = (H - 2 * PAD - 40) / Math.max(max, 6.5), mid = (H - 40) / 2 + 6;
-      var base = tot.map(function (v) { return mid - v * scale / 2; });
-      layers.forEach(function (layer, l) {
-        var top = [], bot = [];
-        for (var i = 0; i < N; i++) { var y0 = base[i]; var y1 = y0 + layer[i] * scale; top.push([xs[i], y0]); bot.push([xs[i], y1]); base[i] = y1; }
-        var d = smooth(top) + ' L' + smooth(bot.slice().reverse()).slice(1) + ' Z';
-        paths[l].setAttribute('d', d);
-      });
-    }
-    var reduceM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var visible = true, start = performance.now();
-    draw(0);
-    if (reduceM) return;
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(svg);
-    (function loop(now) { if (visible && !document.hidden) draw((now - start) / 1000); requestAnimationFrame(loop); })(start);
-  })();
-
-  // ---- Highlight numbers count up when they come into view ----
-  (function () {
-    var els = document.querySelectorAll('[data-count]');
-    if (reduce || !('IntersectionObserver' in window)) return;
+  // Highlight numbers count up
+  if (!reduce && 'IntersectionObserver' in window) {
     var io2 = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return; io2.unobserve(e.target);
-        var el = e.target, to = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0), suf = el.dataset.suffix || '', t0 = null;
+        var el = e.target, to = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0), t0 = null;
         (function step(t) {
-          if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1200), v = to * (1 - Math.pow(1 - p, 3));
-          el.textContent = v.toFixed(dec) + suf; if (p < 1) requestAnimationFrame(step);
+          if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1200);
+          el.textContent = (to * (1 - Math.pow(1 - p, 3))).toFixed(dec); if (p < 1) requestAnimationFrame(step);
         })(performance.now());
       });
     }, { threshold: .6 });
-    els.forEach(function (el) { io2.observe(el); });
-  })();
-
-  // ---- Scroll progress bar and timeline rail ----
-  (function () {
-    var bar = document.querySelector('.progress'), tl = document.querySelector('.timeline'), fill = tl;
-    var jobs = document.querySelectorAll('.job');
-    function onScroll() {
-      var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
-      if (bar) bar.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')';
-      if (tl && fill) {
-        var r = tl.getBoundingClientRect(), line = window.innerHeight * .6;
-        var px = Math.max(0, Math.min(r.height - 16, line - r.top - 8));
-        tl.style.setProperty('--fill', px + 'px');
-        jobs.forEach(function (j) { j.classList.toggle('passed', j.getBoundingClientRect().top + 12 < line); });
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onScroll); onScroll();
-  })();
-
-
-  // ---- Pointer spotlight on cards ----
-  document.querySelectorAll('.proj, .skill, .edu-item, .contact-card').forEach(function (c) {
-    c.addEventListener('pointermove', function (e) {
-      var r = c.getBoundingClientRect();
-      c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
-    });
-  });
-
-
-  // ---- Rooms light up, and the sky takes their colour ----
-  var zones = document.querySelectorAll('[data-zone]');
-  function setSky(z) { sky.style.setProperty('--sky', COLORS[z]); }
-  setSky('purple');
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.target.classList.contains('room')) e.target.classList.toggle('lit', e.isIntersecting);
-        if (e.isIntersecting) setSky(e.target.getAttribute('data-zone'));
-      });
-    }, { rootMargin: '-40% 0px -40% 0px' });
-    zones.forEach(function (z) { io.observe(z); });
-  } else {
-    document.querySelectorAll('.room').forEach(function (r) { r.classList.add('lit'); });
+    document.querySelectorAll('[data-count]').forEach(function (el) { io2.observe(el); });
   }
 })();
 </script>
