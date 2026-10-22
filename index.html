@@ -216,33 +216,47 @@
 
 
 
-  /* ---------- Screenshot-style mockup of the ROD platform ---------- */
+  /* ---------- Looping walkthrough of the ROD platform ---------- */
   .shot { margin: -4px -4px 20px; }
   .shot-btn { display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #1a1d29; cursor: zoom-in; position: relative; text-align: left; font: inherit; color: inherit; }
   .shot-bar { display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; background: #232634; border-bottom: 1px solid rgba(255,255,255,.06); }
   .shot-bar i { width: 8px; height: 8px; border-radius: 50%; background: #3b3f50; display: block; }
   .shot-bar span { margin-left: 8px; font-size: 11px; color: #8d8ba3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .shot-view { display: block; position: relative; overflow: hidden; aspect-ratio: 1280 / 820; }
+  .shot-view { display: block; position: relative; overflow: hidden; aspect-ratio: 1280 / 820; background: #fff; }
   .shot-scale, .lb-scale { position: absolute; left: 0; top: 0; width: 1280px; transform-origin: 0 0; transform: scale(var(--k, .28)); }
   .shot-hint { position: absolute; right: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500;
                color: #fff; background: rgba(18,17,26,.78); padding: 5px 10px; border-radius: 6px; opacity: 0; transition: opacity .2s ease; }
   .shot-hint svg { width: 13px; height: 13px; }
   .shot-btn:hover .shot-hint, .shot-btn:focus-visible .shot-hint { opacity: 1; }
   @media (hover: none) { .shot-hint { opacity: 1; } }
+  .chap { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+  .pp { flex: none; width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--line); background: transparent; color: var(--text-2); display: grid; place-items: center; cursor: pointer; padding: 0; }
+  .pp:hover { color: var(--text); border-color: var(--text-3); }
+  .pp svg { width: 12px; height: 12px; }
+  .pp .i-play, .shot.paused .pp .i-pause { display: none; }
+  .shot.paused .pp .i-play { display: block; }
+  .chap ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; flex: 1; min-width: 0; }
+  .chap li { min-width: 0; }
+  .cb { display: block; height: 3px; border-radius: 2px; background: var(--line); overflow: hidden; }
+  .cb i { display: block; height: 100%; width: 0; background: var(--zone); }
+  .cl { display: block; margin-top: 5px; font-size: .72rem; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chap li.on .cl { color: var(--text); }
+  @media (max-width: 420px) { .cl { font-size: .66rem; } }
   .shot figcaption { margin-top: 8px; font-size: .8rem; color: var(--text-3); }
 
-  .lightbox { border: 0; padding: 0; background: transparent; max-width: min(1280px, 94vw); width: 100%; color: var(--text); }
-  .lightbox::backdrop { background: rgba(8, 8, 14, .82); backdrop-filter: blur(3px); }
+  .lightbox { border: 0; padding: 0; background: transparent; max-width: min(1280px, 94vw); width: 100%; color: var(--text); overflow: visible; }
+  .lightbox::backdrop { background: rgba(8, 8, 14, .85); backdrop-filter: blur(3px); }
   .lb-frame { border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: #1a1d29; }
-  .lb-view { position: relative; overflow-x: hidden; overflow-y: auto; max-height: calc(90vh - 70px); }
-  .lb-view .lb-scale { position: relative; }
+  .lb-view { position: relative; overflow: hidden; background: #fff; }
   .lb-close { position: absolute; right: 6px; top: -2px; z-index: 2; width: 32px; height: 26px; border: 0; background: transparent; color: #c2c0d2; font-size: 22px; line-height: 1; cursor: pointer; }
   .lb-close:hover { color: #fff; }
   .lb-note { margin: 10px 2px 0; font-size: .85rem; color: var(--text-3); text-align: center; }
 
-  /* The mockup itself: same look as the ROD app (light theme, iBES-style navy and red) */
-  .rod-app { width: 1280px; height: 820px; background: #fff; color: #0a0c12; font-family: "Inter", system-ui, sans-serif; font-size: 13px; line-height: 1.45; overflow: hidden; display: flex; flex-direction: column; }
+  /* The app (light theme, same look as the ROD platform) */
+  .rod-app { position: relative; width: 1280px; height: 820px; background: #fff; color: #0a0c12; font-family: "Inter", system-ui, sans-serif; font-size: 13px; line-height: 1.45; overflow: hidden; display: flex; flex-direction: column; transition: opacity .5s ease; }
+  .rod-app.fade { opacity: 0; }
   .rod-app * { box-sizing: border-box; }
+  .rod-app svg { display: block; }
   .ra-stripe { height: 4px; flex: none; background: linear-gradient(90deg, #ef1f35 0 22%, #8c0d19 22% 40%, #001a60 40% 100%); }
   .ra-head { height: 58px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; border-bottom: 1px solid #E6E9F1; }
   .ra-left, .ra-right { display: flex; align-items: center; gap: 18px; }
@@ -251,39 +265,106 @@
   .ra-div { width: 1px; height: 20px; background: #E6E9F1; }
   .ra-sel { width: 340px; display: flex; align-items: center; gap: 12px; padding: 8px 14px; border: 1px solid #D3D9E6; border-radius: 8px; }
   .ra-sel i { width: 7px; height: 7px; border-radius: 50%; background: #1b6f4a; }
-  .ra-sel span { flex: 1; font-weight: 500; color: #001a60; font-size: 13px; }
+  .ra-sel span { flex: 1; font-weight: 500; color: #001a60; }
   .ra-sel em { font-style: normal; font-size: 11px; color: #7a8296; }
   .ra-sel svg { width: 12px; height: 12px; color: #7a8296; }
   .ra-time { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .06em; color: #7a8296; }
   .ra-av { width: 32px; height: 32px; border-radius: 50%; background: #001a60; color: #fff; font-size: 10.5px; font-weight: 600; letter-spacing: .08em; display: grid; place-items: center; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ef1f35; }
   .ra-body { flex: 1; display: flex; min-height: 0; }
-  .ra-rail { width: 68px; flex: none; background: linear-gradient(180deg, #001a60 0%, #000f3a 100%); display: flex; flex-direction: column; align-items: center; gap: 6px; padding-bottom: 12px; }
+  .ra-rail { width: 68px; flex: none; background: linear-gradient(180deg, #001a60 0%, #000f3a 100%); display: flex; flex-direction: column; align-items: center; gap: 6px; }
   .rr-top { height: 56px; width: 100%; display: grid; place-items: center; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 10px; color: rgba(255,255,255,.6); }
   .rr-top svg, .rr-i svg { width: 17px; height: 17px; }
-  .rr-i { position: relative; width: 44px; height: 44px; border-radius: 8px; display: grid; place-items: center; color: rgba(255,255,255,.6); }
+  .rr-i { position: relative; width: 44px; height: 44px; border-radius: 8px; display: grid; place-items: center; color: rgba(255,255,255,.6); transition: background-color .25s, color .25s; }
+  .rr-i::before { content: ""; position: absolute; left: -12px; top: 10px; width: 3px; height: 24px; border-radius: 0 3px 3px 0; background: #ef1f35; opacity: 0; transition: opacity .25s; }
   .rr-i.on { background: rgba(255,255,255,.13); color: #fff; }
-  .rr-i.on::before { content: ""; position: absolute; left: -12px; top: 10px; width: 3px; height: 24px; border-radius: 0 3px 3px 0; background: #ef1f35; }
+  .rr-i.on::before { opacity: 1; }
   .rr-sep { width: 28px; height: 1px; background: rgba(255,255,255,.15); margin: 8px 0; }
-  .ra-main { flex: 1; min-width: 0; background: #fff; padding: 30px 40px; overflow: hidden; }
+  .ra-main { flex: 1; min-width: 0; position: relative; overflow: hidden; }
+  .pg { position: absolute; inset: 0; padding: 30px 40px; opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s linear .45s; }
+  .rod-app[data-scene="up"] .pg-up, .rod-app[data-scene="dash"] .pg-dash { opacity: 1; visibility: visible; transition: opacity .45s ease; }
   .ra-label { margin: 0 0 12px; font-family: "JetBrains Mono", monospace; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #7a8296; }
   .ra-h { margin: 0 0 22px; font-family: "Archivo", sans-serif; font-weight: 700; font-size: 34px; letter-spacing: -0.025em; line-height: 1.05; }
-  .ra-ctrl { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .ra-hi { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .ra-hi svg { width: 28px; height: 28px; color: #001a60; stroke-width: 1.8; }
+  .ra-desc { margin: 0 0 22px; color: #4a5368; font-size: 14px; }
+  .ra-red { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 6px; font-weight: 600; background: #ef1f35; color: #fff; }
+  .ra-red svg { width: 15px; height: 15px; }
+  .ra-red.sm { padding: 9px 22px; }
+
+  /* Upload page */
+  .up-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 22px; align-items: start; }
+  .pn { border: 1px solid #E6E9F1; border-radius: 14px; background: #fff; box-shadow: 0 1px 2px rgba(0,16,58,.06), 0 12px 32px -12px rgba(0,16,58,.16); overflow: hidden; }
+  .pn-h { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-bottom: 1px solid #E6E9F1; font-family: "Archivo", sans-serif; font-weight: 700; font-size: 15px; }
+  .pn-h > i { width: 4px; height: 18px; border-radius: 2px; background: #ef1f35; }
+  .pn-h > i.nv { background: #001a60; }
+  .cnt { margin-left: 4px; font-family: "Inter", sans-serif; font-size: 11px; font-weight: 600; color: #001a60; background: rgba(0,26,96,.07); border-radius: 999px; padding: 1px 8px; }
+  .pn-b { padding: 20px; }
+  .dz { position: relative; height: 290px; border: 2px dashed #D3D9E6; border-radius: 12px; background: #f4f6fb; transition: border-color .2s, background-color .2s, transform .2s; }
+  .dz-idle, .dz-busy { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; transition: opacity .2s; }
+  .dz-busy { opacity: 0; }
+  .dz-ico { width: 56px; height: 56px; border-radius: 16px; background: #001a60; color: #fff; display: grid; place-items: center; margin-bottom: 18px; transition: background-color .2s; }
+  .dz-ico svg { width: 24px; height: 24px; }
+  .dz-t { font-size: 15px; }
+  .dz-s { margin: 4px 0 20px; font-size: 12.5px; color: #7a8296; }
+  .dz-types { display: flex; gap: 6px; margin-top: 20px; }
+  .dz-types em { font-style: normal; font-family: "JetBrains Mono", monospace; font-size: 10px; color: #7a8296; background: #fff; padding: 2px 8px; border-radius: 4px; box-shadow: 0 0 0 1px #E6E9F1; }
+  .dz-busy b { margin-top: 14px; font-size: 14px; }
+  .dz-busy span:last-child { font-size: 12px; color: #7a8296; margin-top: 2px; }
+  .dz.hot { border-color: #ef1f35; background: #fff5f6; transform: scale(1.01); }
+  .dz.hot .dz-ico { background: #ef1f35; }
+  .dz.busy .dz-idle { opacity: 0; }
+  .dz.busy .dz-busy { opacity: 1; }
+  .pn-note { display: flex; align-items: center; gap: 8px; margin: 14px 0 0; font-size: 12px; color: #7a8296; }
+  .pn-note svg { width: 14px; height: 14px; }
+  .spin { width: 30px; height: 30px; border-radius: 50%; border: 3px solid rgba(0,26,96,.15); border-top-color: #001a60; animation: rodspin .8s linear infinite; display: inline-block; }
+  @keyframes rodspin { to { transform: rotate(360deg); } }
+  .banner { display: flex; align-items: center; gap: 10px; margin: 0 20px; max-height: 0; opacity: 0; overflow: hidden; font-size: 12.5px; font-weight: 500; color: #047857; background: #ecfdf5; border-radius: 8px; transition: max-height .35s ease, opacity .35s ease, margin .35s ease, padding .35s ease; padding: 0 14px; }
+  .banner svg { width: 15px; height: 15px; }
+  .banner.show { max-height: 44px; opacity: 1; margin: 14px 20px 4px; padding: 10px 14px; }
+  .fl { list-style: none; margin: 0; padding: 0; }
+  .fr { display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-top: 1px solid #E6E9F1; }
+  .fl .fr:first-child { border-top: 0; }
+  .fr.new { max-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0; overflow: hidden; transition: max-height .4s ease, padding .4s ease, opacity .4s ease; }
+  .fr.new.show { max-height: 80px; padding-top: 14px; padding-bottom: 14px; opacity: 1; background: #fbfcfe; }
+  .fr.new.show + .fr { border-top: 1px solid #E6E9F1; }
+  .fl .fr.new:not(.show) + .fr { border-top: 0; }
+  .ft { flex: none; width: 34px; height: 40px; border-radius: 6px; background: #e9f7ef; color: #1b7a4b; font-size: 9.5px; font-weight: 700; display: grid; place-items: center; letter-spacing: .04em; }
+  .fn { flex: 1; min-width: 0; }
+  .fn b { display: block; font-size: 13.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .fn span { font-size: 11.5px; color: #7a8296; }
+  .run { display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px; border-radius: 6px; font-size: 12px; font-weight: 600; white-space: nowrap; transition: background-color .2s, color .2s; }
+  .run svg { width: 13px; height: 13px; }
+  .run.idle { color: #001a60; box-shadow: inset 0 0 0 1px rgba(0,26,96,.25); }
+  .run.idle.hover { background: #001a60; color: #fff; }
+  .run.load { background: #001a60; color: #fff; }
+  .run.load .spin { width: 13px; height: 13px; border-width: 2px; border-color: rgba(255,255,255,.3); border-top-color: #fff; }
+  .run.ok { background: #ecfdf5; color: #047857; box-shadow: inset 0 0 0 1px #a7f3d0; }
+
+  /* Dashboard page */
+  .ra-ctrl { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
   .ra-date { display: inline-flex; align-items: center; gap: 10px; border: 1px solid #D3D9E6; border-radius: 999px; padding: 9px 16px; color: #001a60; font-weight: 500; }
   .ra-date svg { width: 14px; height: 14px; color: #7a8296; }
   .ra-date b { font-family: "JetBrains Mono", monospace; font-weight: 500; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #7a8296; }
   .ra-btns { display: flex; gap: 12px; }
-  .ra-out, .ra-red { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 13px; }
-  .ra-out { border: 1px solid rgba(0,26,96,.25); color: #001a60; }
-  .ra-red { background: #ef1f35; color: #fff; }
-  .ra-red svg { width: 15px; height: 15px; }
-  .ra-report { border: 2px solid #001a60; padding: 22px 26px; }
+  .ra-out { display: inline-flex; align-items: center; padding: 10px 20px; border-radius: 6px; font-weight: 600; border: 1px solid rgba(0,26,96,.25); color: #001a60; }
+  .ex { position: relative; min-width: 148px; justify-content: center; transition: background-color .2s; }
+  .ex-a, .ex-b { display: inline-flex; align-items: center; gap: 8px; transition: opacity .2s; }
+  .ex-b { position: absolute; opacity: 0; }
+  .ex-b .spin { width: 14px; height: 14px; border-width: 2px; border-color: rgba(255,255,255,.35); border-top-color: #fff; }
+  .ex.load { background: #8c0d19; }
+  .ex.load .ex-a { opacity: 0; }
+  .ex.load .ex-b { opacity: 1; }
+  .ex.hover { background: #8c0d19; }
+  .rep-win { height: 590px; overflow: hidden; }
+  .ra-report { border: 2px solid #001a60; padding: 22px 26px; transition: transform 1.2s cubic-bezier(.4,0,.2,1); }
   .rr-title { text-align: center; margin-bottom: 18px; }
   .rr-logo { display: inline-block; font-family: "Archivo", sans-serif; font-weight: 800; letter-spacing: .3em; font-size: 15px; color: #001a60; border: 2px solid #001a60; padding: 6px 16px; margin-bottom: 10px; }
-  .rr-title h2 { margin: 0; font-family: "Archivo", sans-serif; font-size: 19px; font-weight: 700; color: #001a60; letter-spacing: .01em; }
+  .rr-title h2 { margin: 0; font-family: "Archivo", sans-serif; font-size: 19px; font-weight: 700; color: #001a60; }
   .rr-title i { display: block; width: 90px; height: 4px; border-radius: 2px; background: #001a60; margin: 12px auto 0; }
   .rr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
   .rp { border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px 16px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
   .rp h3 { margin: 0 0 8px; text-align: center; font-family: "Archivo", sans-serif; font-size: 15px; font-weight: 700; color: #001a60; }
+  .rp-pie.hover { box-shadow: 0 0 0 2px rgba(0,26,96,.18); }
   .rp-donut { display: flex; align-items: center; gap: 12px; height: 168px; }
   .rp-donut svg { width: 168px; height: 168px; flex: none; }
   .rp-donut ul, .rp-key { list-style: none; margin: 0; padding: 0; }
@@ -297,10 +378,9 @@
   .rc-col { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; }
   .rc-tot { font-size: 11px; font-weight: 700; color: #1e293b; }
   .rc-stack { width: 100%; display: flex; flex-direction: column; border-radius: 4px 4px 0 0; overflow: hidden; }
-  .rc-stack i { display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 10px; font-weight: 700; color: #fff; }
+  .rc-stack i { display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 10px; font-weight: 700; color: #fff; overflow: hidden; }
   .rc-lab { font-size: 10px; font-weight: 700; color: #64748B; }
-  .rp-wide h3 { margin-bottom: 2px; }
-  .rp-sub { text-align: center; margin: 0 0 10px; font-size: 11px; font-style: italic; color: #64748B; }
+  .rp-sub { text-align: center; margin: -4px 0 10px; font-size: 11px; font-style: italic; color: #64748B; }
   .rm { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
   .rm h4 { margin: 0 0 6px; text-align: center; font-family: "Archivo", sans-serif; font-size: 13px; color: #001a60; }
   .rt h5 { margin: 6px 0 5px; font-size: 12px; font-weight: 700; color: #334155; }
@@ -310,6 +390,35 @@
   .rt .n { text-align: right; }
   .rt td.up { color: #16a34a; font-weight: 700; }
   .rt td.dn { color: #ef4444; font-weight: 700; }
+  /* Build-in animations when the dashboard opens */
+  .ra-report.play .rp-donut circle { animation: rodarc .9s cubic-bezier(.3,.7,.3,1) both; }
+  @keyframes rodarc { from { stroke-dasharray: 0 var(--C); } }
+  .ra-report.play .rp-donut li, .ra-report.play .rc-tot, .ra-report.play .rt tbody tr { animation: rodfade .5s ease both; }
+  @keyframes rodfade { from { opacity: 0; transform: translateY(4px); } }
+  .ra-report.play .rc-stack { animation: rodgrow .8s cubic-bezier(.3,.7,.3,1) both; }
+  @keyframes rodgrow { from { height: 0; } }
+
+  /* Toast, cursor */
+  .toast { position: absolute; right: 26px; bottom: 26px; display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; background: #0a0c12; color: #fff;
+           box-shadow: 0 20px 40px -12px rgba(0,16,58,.5); opacity: 0; transform: translateY(12px); transition: opacity .35s ease, transform .35s ease; z-index: 5; }
+  .toast.show { opacity: 1; transform: none; }
+  .toast .pdf { width: 32px; height: 38px; border-radius: 5px; background: #ef1f35; font-size: 9.5px; font-weight: 700; display: grid; place-items: center; }
+  .toast b { display: block; font-size: 12.5px; font-weight: 600; }
+  .toast div span { font-size: 11.5px; color: #7fe0a2; }
+  .cur { position: absolute; left: 0; top: 0; z-index: 10; pointer-events: none; transform: translate(1180px, 760px); transition-property: transform; transition-timing-function: cubic-bezier(.45,.05,.3,1); }
+  .cur > svg { width: 24px; height: 24px; filter: drop-shadow(0 2px 3px rgba(0,0,0,.3)); position: relative; }
+  .cur::after { content: ""; position: absolute; left: -14px; top: -14px; width: 28px; height: 28px; border-radius: 50%; background: rgba(239,31,53,.35); transform: scale(0); opacity: 0; }
+  .cur.click::after { animation: rodclick .45s ease-out; }
+  @keyframes rodclick { 0% { transform: scale(.3); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
+  .drag { position: absolute; left: 14px; top: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; background: #fff; border-radius: 8px; white-space: nowrap;
+          font-size: 12px; font-weight: 600; box-shadow: 0 10px 24px -6px rgba(0,16,58,.35), 0 0 0 1px #E6E9F1; opacity: 0; transform: rotate(-3deg); transition: opacity .2s; }
+  .drag .ft { width: 24px; height: 28px; font-size: 7.5px; }
+  .cur.dragging .drag { opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ra-report.play .rp-donut circle, .ra-report.play .rp-donut li, .ra-report.play .rc-tot, .ra-report.play .rt tbody tr, .ra-report.play .rc-stack { animation: none; }
+    .cur { display: none; }
+  }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .progress { display: none; } }
   @media print {
     body { background: #fff; color: #000; }
@@ -443,44 +552,75 @@
       <div class="room-body">
       <div class="projects">
         <article class="proj">
-          <figure class="shot">
-            <button class="shot-btn" type="button" aria-label="Enlarge the sample dashboard screenshot">
-              <span class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>Shareholding platform · Dashboard</span></span>
-              <span class="shot-view" aria-hidden="true"><span class="shot-scale"><div class="rod-app">
+          <figure class="shot" data-player>
+            <button class="shot-btn" type="button" aria-label="Enlarge the platform walkthrough">
+              <span class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>Shareholding platform · walkthrough</span></span>
+              <span class="shot-view" aria-hidden="true"><span class="shot-scale"><div class="rod-app" data-scene="up">
   <div class="ra-stripe"></div>
   <div class="ra-head">
     <div class="ra-left"><span class="ra-mark"></span><span class="ra-brand">Shareholding Platform</span><span class="ra-div"></span>
-      <span class="ra-sel"><i></i><span>Sample Holdings Berhad</span><em>0000</em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></span></div>
+      <span class="ra-sel"><i></i><span>Sample Holdings Berhad</span><em>0000</em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></div>
     <div class="ra-right"><span class="ra-time">WED 02 SEP · 09:30 MYT</span><span class="ra-av">AH</span></div>
   </div>
   <div class="ra-body">
-    <aside class="ra-rail"><span class="rr-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span><span class="rr-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><span class="rr-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg></span><span class="rr-sep"></span><span class="rr-i on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span><span class="rr-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2zM22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></svg></span><span class="rr-sep"></span><span class="rr-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3-3 3 3"/></svg></span><span class="rr-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M2 15h10M9 18l3-3-3-3"/></svg></span><span class="rr-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V3M6 11l6 6 6-6M19 21H5"/></svg></span><span class="rr-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="m13.3 16.3 1.7 1.7"/></svg></span></aside>
+    <aside class="ra-rail"><span class="rr-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span><span class="rr-i" data-k="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><span class="rr-i" data-k="guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg></span><span class="rr-sep"></span><span class="rr-i" data-k="dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span><span class="rr-i" data-k="dict"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2zM22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></svg></span><span class="rr-sep"></span><span class="rr-i" data-k="raw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3-3 3 3"/></svg></span><span class="rr-i" data-k="mapped"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M2 15h10M9 18l3-3-3-3"/></svg></span><span class="rr-i" data-k="sorted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V3M6 11l6 6 6-6M19 21H5"/></svg></span><span class="rr-i" data-k="report"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="m13.3 16.3 1.7 1.7"/></svg></span></aside>
     <div class="ra-main">
-      <p class="ra-label">Platform</p>
-      <h1 class="ra-h">Dashboard</h1>
-      <div class="ra-ctrl">
-        <span class="ra-date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><b>As of</b>02/09/2026</span>
-        <span class="ra-btns"><span class="ra-out">Clear All</span><span class="ra-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export as PDF</span></span>
-      </div>
-      <div class="ra-report">
-        <div class="rr-title"><span class="rr-logo">SAMPLE</span><h2>Shareholding Analysis: ROD as of 2 September 2026</h2><i></i></div>
-        <div class="rr-grid">
-          <div class="rp"><h3>Shareholding Breakdown</h3>
-            <div class="rp-donut"><svg viewBox="0 0 220 220"><g transform="rotate(-90 110 110)"><circle r="70" cx="110" cy="110" fill="none" stroke="#b22222" stroke-width="34" stroke-dasharray="231.3 208.5" stroke-dashoffset="0.0"/><circle r="70" cx="110" cy="110" fill="none" stroke="#001a60" stroke-width="34" stroke-dasharray="89.7 350.1" stroke-dashoffset="-231.3"/><circle r="70" cx="110" cy="110" fill="none" stroke="#15528b" stroke-width="34" stroke-dasharray="53.2 386.6" stroke-dashoffset="-321.1"/><circle r="70" cx="110" cy="110" fill="none" stroke="#575759" stroke-width="34" stroke-dasharray="49.3 390.6" stroke-dashoffset="-374.3"/><circle r="70" cx="110" cy="110" fill="none" stroke="#ff005b" stroke-width="34" stroke-dasharray="16.3 423.5" stroke-dashoffset="-423.5"/></g></svg><ul><li><i style="background:#b22222"></i><span>Substantial shareholders</span><b>52.6%</b></li><li><i style="background:#001a60"></i><span>Management and related parties</span><b>20.4%</b></li><li><i style="background:#15528b"></i><span>Local funds</span><b>12.1%</b></li><li><i style="background:#575759"></i><span>Retail</span><b>11.2%</b></li><li><i style="background:#ff005b"></i><span>Foreign funds</span><b>3.7%</b></li></ul></div></div>
-          <div class="rp"><h3>Institutional Split</h3>
-            <ul class="rp-key"><li><i style="background:#ff005b"></i>Foreign Funds</li><li><i style="background:#63a5e4"></i>GLC</li><li><i style="background:#2572bb"></i>Local Non-GLC</li></ul>
-            <div class="rc"><div class="rc-col"><span class="rc-tot">12.34%</span><div class="rc-stack" style="height:88%"><i style="flex:2.86;background:#ff005b">2.86%</i><i style="flex:4.88;background:#2572bb">4.88%</i><i style="flex:4.6;background:#63a5e4">4.60%</i></div><span class="rc-lab">5 Aug</span></div><div class="rc-col"><span class="rc-tot">12.48%</span><div class="rc-stack" style="height:89%"><i style="flex:2.84;background:#ff005b">2.84%</i><i style="flex:5.02;background:#2572bb">5.02%</i><i style="flex:4.62;background:#63a5e4">4.62%</i></div><span class="rc-lab">11 Aug</span></div><div class="rc-col"><span class="rc-tot">12.66%</span><div class="rc-stack" style="height:90%"><i style="flex:2.79;background:#ff005b">2.79%</i><i style="flex:5.16;background:#2572bb">5.16%</i><i style="flex:4.71;background:#63a5e4">4.71%</i></div><span class="rc-lab">18 Aug</span></div><div class="rc-col"><span class="rc-tot">12.87%</span><div class="rc-stack" style="height:92%"><i style="flex:2.77;background:#ff005b">2.77%</i><i style="flex:5.3;background:#2572bb">5.30%</i><i style="flex:4.8;background:#63a5e4">4.80%</i></div><span class="rc-lab">26 Aug</span></div><div class="rc-col"><span class="rc-tot">13.04%</span><div class="rc-stack" style="height:93%"><i style="flex:2.71;background:#ff005b">2.71%</i><i style="flex:5.41;background:#2572bb">5.41%</i><i style="flex:4.92;background:#63a5e4">4.92%</i></div><span class="rc-lab">2 Sep</span></div></div></div>
+      <section class="pg pg-up">
+        <p class="ra-label">Uploads</p>
+        <h1 class="ra-h ra-hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3-3 3 3"/></svg>Raw File Uploads</h1>
+        <p class="ra-desc">Upload each new shareholder register, then run the workflow to clean, validate and map it.</p>
+        <div class="up-grid">
+          <div class="pn"><div class="pn-h"><i></i>Upload a file</div>
+            <div class="pn-b">
+              <div class="dz">
+                <div class="dz-idle"><span class="dz-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 13v8M8 17l4-4 4 4"/><path d="M20 16.6A5 5 0 0 0 18 7h-1.3A8 8 0 1 0 4 15.3"/></svg></span>
+                  <b class="dz-t">Drag and drop a file here</b><span class="dz-s">or choose one from your computer</span>
+                  <span class="ra-red sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Browse files</span>
+                  <span class="dz-types"><em>XLSX</em><em>CSV</em><em>PDF</em></span></div>
+                <div class="dz-busy"><span class="spin"></span><b>Uploading…</b><span>02092026 Sample Holdings.xlsx</span></div>
+              </div>
+              <p class="pn-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Files are saved to this company’s Google Drive folder.</p>
+            </div></div>
+          <div class="pn"><div class="pn-h"><i class="nv"></i>Files in Google Drive<span class="cnt">3</span></div>
+            <div class="banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="m22 4-10 10-3-3"/></svg>Workflow complete: 1,284 holders cleaned and mapped</div>
+            <ul class="fl">
+              <li class="fr new"><span class="ft">XLS</span><div class="fn"><b>02092026 Sample Holdings.xlsx</b><span>184 KB · 2 Sep 2026</span></div><span class="run idle"><svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z" fill="currentColor"/></svg>Run</span></li>
+              <li class="fr"><span class="ft">XLS</span><div class="fn"><b>26082026 Sample Holdings.xlsx</b><span>181 KB · 26 Aug 2026</span></div><span class="run ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="m22 4-10 10-3-3"/></svg>Complete</span></li>
+              <li class="fr"><span class="ft">XLS</span><div class="fn"><b>18082026 Sample Holdings.xlsx</b><span>179 KB · 18 Aug 2026</span></div><span class="run ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="m22 4-10 10-3-3"/></svg>Complete</span></li>
+              <li class="fr"><span class="ft">XLS</span><div class="fn"><b>11082026 Sample Holdings.xlsx</b><span>178 KB · 11 Aug 2026</span></div><span class="run ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="m22 4-10 10-3-3"/></svg>Complete</span></li>
+            </ul></div>
         </div>
-        <div class="rp rp-wide"><h3>Top 5 Buyers &amp; Top 5 Sellers</h3><p class="rp-sub">Period of comparison: 2026-09-02 vs 2026-08-26</p>
-          <div class="rm"><div><h4>Local Funds</h4><div class="rt"><h5>Top 5 Buyers</h5><table><thead><tr><th>No.</th><th>Fund Name</th><th class="n">Shares Bought</th><th class="n">%</th></tr></thead><tbody><tr><td>1</td><td>Pension Fund A</td><td class="n">612,400</td><td class="n up">+5.80%</td></tr><tr><td>2</td><td>Asset Manager B</td><td class="n">438,000</td><td class="n up">+18.20%</td></tr><tr><td>3</td><td>Insurance Fund C</td><td class="n">126,500</td><td class="n up">+9.40%</td></tr></tbody></table></div><div class="rt"><h5>Top 5 Sellers</h5><table><thead><tr><th>No.</th><th>Fund Name</th><th class="n">Shares Sold</th><th class="n">%</th></tr></thead><tbody><tr><td>1</td><td>Private Bank D</td><td class="n">184,000</td><td class="n dn">−42.10%</td></tr><tr><td>2</td><td>Unit Trust E</td><td class="n">92,300</td><td class="n dn">−7.60%</td></tr></tbody></table></div></div>
-          <div><h4>Foreign Funds</h4><div class="rt"><h5>Top 5 Buyers</h5><table><thead><tr><th>No.</th><th>Fund Name</th><th class="n">Shares Bought</th><th class="n">%</th></tr></thead><tbody><tr><td>1</td><td>Global Bank F</td><td class="n">7,800</td><td class="n up">+0.22%</td></tr><tr><td>2</td><td>Securities Co. G</td><td class="n">6,000</td><td class="n up">+1.32%</td></tr></tbody></table></div><div class="rt"><h5>Top 5 Sellers</h5><table><thead><tr><th>No.</th><th>Fund Name</th><th class="n">Shares Sold</th><th class="n">%</th></tr></thead><tbody><tr><td>1</td><td>Investment Trust H</td><td class="n">120,800</td><td class="n dn">−67.50%</td></tr><tr><td>2</td><td>Global Bank I</td><td class="n">86,100</td><td class="n dn">−0.95%</td></tr><tr><td>3</td><td>Custodian J</td><td class="n">71,500</td><td class="n dn">−5.31%</td></tr></tbody></table></div></div></div></div>
-      </div>
+      </section>
+      <section class="pg pg-dash">
+        <p class="ra-label">Platform</p>
+        <h1 class="ra-h">Dashboard</h1>
+        <div class="ra-ctrl">
+          <span class="ra-date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><b>As of</b>02/09/2026</span>
+          <span class="ra-btns"><span class="ra-out">Clear All</span><span class="ra-red ex"><span class="ex-a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export as PDF</span><span class="ex-b"><span class="spin"></span>Exporting…</span></span></span>
+        </div>
+        <div class="rep-win"><div class="ra-report">
+          <div class="rr-title"><span class="rr-logo">SAMPLE</span><h2>Shareholding Analysis: ROD as of 2 September 2026</h2><i></i></div>
+          <div class="rr-grid">
+            <div class="rp rp-pie"><h3>Shareholding Breakdown</h3>
+              <div class="rp-donut"><svg viewBox="0 0 220 220"><g transform="rotate(-90 110 110)"><circle r="70" cx="110" cy="110" fill="none" stroke="#b22222" stroke-width="34" style="--C:439.8px;animation-delay:0.00s" stroke-dasharray="231.3 208.5" stroke-dashoffset="0.0"/><circle r="70" cx="110" cy="110" fill="none" stroke="#001a60" stroke-width="34" style="--C:439.8px;animation-delay:0.18s" stroke-dasharray="89.7 350.1" stroke-dashoffset="-231.3"/><circle r="70" cx="110" cy="110" fill="none" stroke="#15528b" stroke-width="34" style="--C:439.8px;animation-delay:0.36s" stroke-dasharray="53.2 386.6" stroke-dashoffset="-321.1"/><circle r="70" cx="110" cy="110" fill="none" stroke="#575759" stroke-width="34" style="--C:439.8px;animation-delay:0.54s" stroke-dasharray="49.3 390.6" stroke-dashoffset="-374.3"/><circle r="70" cx="110" cy="110" fill="none" stroke="#ff005b" stroke-width="34" style="--C:439.8px;animation-delay:0.72s" stroke-dasharray="16.3 423.5" stroke-dashoffset="-423.5"/></g></svg><ul><li style="animation-delay:0.30s"><i style="background:#b22222"></i><span>Substantial shareholders</span><b>52.6%</b></li><li style="animation-delay:0.42s"><i style="background:#001a60"></i><span>Management and related parties</span><b>20.4%</b></li><li style="animation-delay:0.54s"><i style="background:#15528b"></i><span>Local funds</span><b>12.1%</b></li><li style="animation-delay:0.66s"><i style="background:#575759"></i><span>Retail</span><b>11.2%</b></li><li style="animation-delay:0.78s"><i style="background:#ff005b"></i><span>Foreign funds</span><b>3.7%</b></li></ul></div></div>
+            <div class="rp"><h3>Institutional Split</h3>
+              <ul class="rp-key"><li><i style="background:#ff005b"></i>Foreign Funds</li><li><i style="background:#63a5e4"></i>GLC</li><li><i style="background:#2572bb"></i>Local Non-GLC</li></ul>
+              <div class="rc"><div class="rc-col"><span class="rc-tot" style="animation-delay:0.90s">12.34%</span><div class="rc-stack" style="height:88%;animation-delay:0.20s"><i style="flex:2.86;background:#ff005b">2.86%</i><i style="flex:4.88;background:#2572bb">4.88%</i><i style="flex:4.6;background:#63a5e4">4.60%</i></div><span class="rc-lab">5 Aug</span></div><div class="rc-col"><span class="rc-tot" style="animation-delay:1.00s">12.48%</span><div class="rc-stack" style="height:89%;animation-delay:0.30s"><i style="flex:2.84;background:#ff005b">2.84%</i><i style="flex:5.02;background:#2572bb">5.02%</i><i style="flex:4.62;background:#63a5e4">4.62%</i></div><span class="rc-lab">11 Aug</span></div><div class="rc-col"><span class="rc-tot" style="animation-delay:1.10s">12.66%</span><div class="rc-stack" style="height:90%;animation-delay:0.40s"><i style="flex:2.79;background:#ff005b">2.79%</i><i style="flex:5.16;background:#2572bb">5.16%</i><i style="flex:4.71;background:#63a5e4">4.71%</i></div><span class="rc-lab">18 Aug</span></div><div class="rc-col"><span class="rc-tot" style="animation-delay:1.20s">12.87%</span><div class="rc-stack" style="height:92%;animation-delay:0.50s"><i style="flex:2.77;background:#ff005b">2.77%</i><i style="flex:5.3;background:#2572bb">5.30%</i><i style="flex:4.8;background:#63a5e4">4.80%</i></div><span class="rc-lab">26 Aug</span></div><div class="rc-col"><span class="rc-tot" style="animation-delay:1.30s">13.04%</span><div class="rc-stack" style="height:93%;animation-delay:0.60s"><i style="flex:2.71;background:#ff005b">2.71%</i><i style="flex:5.41;background:#2572bb">5.41%</i><i style="flex:4.92;background:#63a5e4">4.92%</i></div><span class="rc-lab">2 Sep</span></div></div></div>
+          </div>
+          <div class="rp"><h3>Top 5 Buyers &amp; Top 5 Sellers</h3><p class="rp-sub">Period of comparison: 2026-09-02 vs 2026-08-26</p>
+            <div class="rm"><div><h4>Local Funds</h4><div class="rt"><h5>Top 5 Buyers</h5><table><thead><tr><th>No.</th><th>Fund Name</th><th class="n">Shares Bought</th><th class="n">%</th></tr></thead><tbody><tr style="animation-delay:0.32s"><td>1</td><td>Pension Fund A</td><td class="n">612,400</td><td class="n up">+5.80%</td></tr><tr style="animation-delay:0.44s"><td>2</td><td>Asset Manager B</td><td class="n">438,000</td><td class="n up">+18.20%</td></tr><tr style="animation-delay:0.56s"><td>3</td><td>Insurance Fund C</td><td class="n">126,500</td><td class="n up">+9.40%</td></tr><tr style="animation-delay:0.68s"><td>4</td><td>Unit Trust D</td><td class="n">101,400</td><td class="n up">+0.79%</td></tr></tbody></table></div><div class="rt"><h5>Top 5 Sellers</h5><table><thead><tr><th>No.</th><th>Fund Name</th><th class="n">Shares Sold</th><th class="n">%</th></tr></thead><tbody><tr style="animation-delay:0.62s"><td>1</td><td>Private Bank E</td><td class="n">184,000</td><td class="n dn">−42.10%</td></tr><tr style="animation-delay:0.74s"><td>2</td><td>Unit Trust F</td><td class="n">92,300</td><td class="n dn">−7.60%</td></tr><tr style="animation-delay:0.86s"><td>3</td><td>Insurance Fund G</td><td class="n">13,800</td><td class="n dn">−0.10%</td></tr></tbody></table></div></div>
+            <div><h4>Foreign Funds</h4><div class="rt"><h5>Top 5 Buyers</h5><table><thead><tr><th>No.</th><th>Fund Name</th><th class="n">Shares Bought</th><th class="n">%</th></tr></thead><tbody><tr style="animation-delay:0.42s"><td>1</td><td>Global Bank H</td><td class="n">7,800</td><td class="n up">+0.22%</td></tr><tr style="animation-delay:0.54s"><td>2</td><td>Securities Co. I</td><td class="n">6,000</td><td class="n up">+1.32%</td></tr></tbody></table></div><div class="rt"><h5>Top 5 Sellers</h5><table><thead><tr><th>No.</th><th>Fund Name</th><th class="n">Shares Sold</th><th class="n">%</th></tr></thead><tbody><tr style="animation-delay:0.72s"><td>1</td><td>Investment Trust J</td><td class="n">120,800</td><td class="n dn">−67.50%</td></tr><tr style="animation-delay:0.84s"><td>2</td><td>Global Bank K</td><td class="n">86,100</td><td class="n dn">−0.95%</td></tr><tr style="animation-delay:0.96s"><td>3</td><td>Custodian L</td><td class="n">71,500</td><td class="n dn">−5.31%</td></tr><tr style="animation-delay:1.08s"><td>4</td><td>Global Bank M</td><td class="n">59,700</td><td class="n dn">−7.35%</td></tr></tbody></table></div></div></div></div>
+        </div></div>
+      </section>
     </div>
   </div>
+  <div class="toast"><span class="pdf">PDF</span><div><b>Sample_Holdings_Dashboard_2026-09-02.pdf</b><span>Downloaded</span></div></div>
+  <div class="cur"><span class="drag"><span class="ft">XLS</span>02092026 Sample Holdings.xlsx</span><svg viewBox="0 0 24 24"><path d="M4 2l16 11-7 1.5L9.5 21z" fill="#0a0c12" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
 </div></span></span>
               <span class="shot-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Enlarge</span>
             </button>
-            <figcaption>Sample data. Client names and figures are not shown.</figcaption>
+            <div class="chap"><button class="pp" type="button" aria-label="Pause walkthrough"><svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 24 24"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button><ol><li><span class="cb"><i></i></span><span class="cl">1. Upload</span></li><li><span class="cb"><i></i></span><span class="cl">2. Process</span></li><li><span class="cb"><i></i></span><span class="cl">3. Dashboard</span></li><li><span class="cb"><i></i></span><span class="cl">4. Export</span></li></ol></div>
+            <figcaption>How the platform works, with sample data. Client names and figures are not shown.</figcaption>
           </figure>
           <p class="meta">Equity advisory · Full-stack data project</p>
               <h3>Shareholding analysis platform</h3>
@@ -593,10 +733,10 @@
   </footer>
 </div>
 
-<dialog class="lightbox" id="lightbox" aria-label="Sample dashboard screenshot">
+<dialog class="lightbox" id="lightbox" aria-label="Platform walkthrough">
   <button class="lb-close" type="button" aria-label="Close">×</button>
-  <div class="lb-frame"><div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>Shareholding platform · Dashboard</span></div><div class="lb-view"><div class="lb-scale"></div></div></div>
-  <p class="lb-note">Sample data. Client names and figures are not shown.</p>
+  <div class="lb-frame"><div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>Shareholding platform · walkthrough</span></div><div class="lb-view"><div class="lb-scale"></div></div></div>
+  <p class="lb-note">How the platform works, with sample data. Client names and figures are not shown.</p>
 </dialog>
 
 <script>
@@ -724,25 +864,117 @@
 
 
 
-  // ---- ROD screenshot: scale the mockup to fit, and enlarge on click ----
+  // ---- ROD platform walkthrough: scale to fit, loop the demo, enlarge on click ----
   (function () {
-    var views = document.querySelectorAll('.shot-view');
-    function fit() {
-      views.forEach(function (v) { var sc = v.querySelector('.shot-scale'); sc.style.setProperty('--k', (v.clientWidth / 1280).toFixed(4)); v.style.height = (820 * v.clientWidth / 1280) + 'px'; });
-      var lv = document.querySelector('.lb-view'), ls = document.querySelector('.lb-scale');
-      if (lv && ls && ls.firstChild) { var k = lv.clientWidth / 1280; ls.style.setProperty('--k', k.toFixed(4)); ls.style.height = (820 * k) + 'px'; }
-    }
-    if ('ResizeObserver' in window) { var ro = new ResizeObserver(fit); views.forEach(function (v) { ro.observe(v); }); }
-    window.addEventListener('resize', fit); fit();
+    var fig = document.querySelector('[data-player]');
+    if (!fig) return;
+    var app = fig.querySelector('.rod-app');
+    var home = fig.querySelector('.shot-scale');
+    var view = fig.querySelector('.shot-view');
     var dlg = document.getElementById('lightbox');
-    if (!dlg || !dlg.showModal) return;
-    var target = dlg.querySelector('.lb-scale');
-    document.querySelectorAll('.shot-btn').forEach(function (b) {
-      b.addEventListener('click', function () {
-        target.innerHTML = ''; target.appendChild(b.querySelector('.rod-app').cloneNode(true));
-        dlg.showModal(); requestAnimationFrame(fit);
+    var lbScale = dlg && dlg.querySelector('.lb-scale');
+    var lbView = dlg && dlg.querySelector('.lb-view');
+    var reduceM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function fit() {
+      var k = view.clientWidth / 1280;
+      home.style.setProperty('--k', k.toFixed(4)); view.style.height = (820 * k) + 'px';
+      if (dlg && dlg.open) { var k2 = lbView.clientWidth / 1280; lbScale.style.setProperty('--k', k2.toFixed(4)); lbView.style.height = (820 * k2) + 'px'; }
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(fit).observe(view);
+    window.addEventListener('resize', fit); fit();
+
+    var $ = function (sel) { return app.querySelector(sel); };
+    var cur = $('.cur'), dz = $('.dz'), rowNew = $('.fr.new'), run = rowNew.querySelector('.run'),
+        banner = $('.banner'), cnt = $('.cnt'), rep = $('.ra-report'), ex = $('.ex'), toast = $('.toast'), pie = $('.rp-pie');
+    var runIdle = run.innerHTML;
+    var chapters = fig.querySelectorAll('.chap li');
+    var marks = [0, 4900, 8700, 15200, 19400];
+    var LOOP = 19400;
+
+    function rail(k) { app.querySelectorAll('.rr-i').forEach(function (r) { r.classList.toggle('on', r.dataset.k === k); }); }
+    function scene(sc) { app.setAttribute('data-scene', sc); }
+    function pos(el, dx, dy) {
+      var a = app.getBoundingClientRect(), r = el.getBoundingClientRect(), k = a.width / 1280;
+      return [(r.left - a.left + r.width * (dx == null ? .5 : dx)) / k, (r.top - a.top + r.height * (dy == null ? .5 : dy)) / k];
+    }
+    function moveXY(x, y, ms) { cur.style.transitionDuration = (ms || 0) + 'ms'; cur.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)'; }
+    function move(el, ms, dx, dy) { var p = pos(el, dx, dy); moveXY(p[0], p[1], ms); }
+    function click() { cur.classList.remove('click'); void cur.offsetWidth; cur.classList.add('click'); }
+
+    function reset() {
+      app.classList.remove('fade'); scene('up'); rail('raw');
+      dz.classList.remove('hot', 'busy'); rowNew.classList.remove('show'); banner.classList.remove('show');
+      run.className = 'run idle'; run.innerHTML = runIdle; cnt.textContent = '3';
+      rep.classList.remove('play'); rep.style.transform = ''; ex.classList.remove('load', 'hover'); toast.classList.remove('show');
+      pie.classList.remove('hover'); cur.classList.remove('dragging'); moveXY(1180, 760, 0);
+    }
+
+    var steps = [
+      [500,   function () { cur.classList.add('dragging'); move(dz, 1500, .45, .5); }],
+      [1500,  function () { dz.classList.add('hot'); }],
+      [2100,  function () { cur.classList.remove('dragging'); click(); dz.classList.remove('hot'); dz.classList.add('busy'); }],
+      [3300,  function () { dz.classList.remove('busy'); rowNew.classList.add('show'); cnt.textContent = '4'; }],
+      [3900,  function () { move(run, 900); }],
+      [4700,  function () { run.classList.add('hover'); }],
+      [4900,  function () { click(); run.className = 'run load'; run.innerHTML = '<span class="spin"></span>Processing'; }],
+      [6900,  function () { run.className = 'run ok'; run.innerHTML = app.querySelector('.fr:not(.new) .run.ok').innerHTML; banner.classList.add('show'); }],
+      [7600,  function () { move(app.querySelector('.rr-i[data-k="dash"]'), 1000); }],
+      [8700,  function () { click(); rail('dash'); scene('dash'); rep.classList.remove('play'); void rep.offsetWidth; rep.classList.add('play'); }],
+      [10400, function () { move(pie, 900, .3, .55); }],
+      [11000, function () { pie.classList.add('hover'); }],
+      [11900, function () { pie.classList.remove('hover'); rep.style.transform = 'translateY(-300px)'; moveXY(780, 600, 1100); }],
+      [13500, function () { rep.style.transform = ''; }],
+      [14300, function () { move(ex, 900); }],
+      [15000, function () { ex.classList.add('hover'); }],
+      [15200, function () { click(); ex.classList.remove('hover'); ex.classList.add('load'); }],
+      [16700, function () { ex.classList.remove('load'); toast.classList.add('show'); moveXY(900, 560, 1200); }],
+      [18800, function () { app.classList.add('fade'); }]
+    ];
+
+    function chapterUI(t) {
+      chapters.forEach(function (li, i) {
+        var a = marks[i], b = marks[i + 1], f = Math.max(0, Math.min(1, (t - a) / (b - a)));
+        li.querySelector('i').style.width = (f * 100) + '%';
+        li.classList.toggle('on', t >= a && t < b);
       });
+    }
+
+    if (reduceM) {
+      // Show the finished dashboard, without motion
+      scene('dash'); rail('dash'); rep.classList.add('play');
+      chapters.forEach(function (li) { li.querySelector('i').style.width = '100%'; });
+      fig.querySelector('.pp').hidden = true;
+    } else {
+      var t = 0, next = 0, last = null, userPaused = false, visible = true;
+      reset();
+      function tick(now) {
+        if (last == null) last = now;
+        var dt = now - last; last = now;
+        if (!userPaused && visible && !document.hidden) {
+          t += Math.min(dt, 100);
+          while (next < steps.length && steps[next][0] <= t) { steps[next][1](); next++; }
+          if (t >= LOOP) { t = 0; next = 0; reset(); }
+          chapterUI(t);
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting || (dlg && dlg.open); }).observe(view);
+      var pp = fig.querySelector('.pp');
+      pp.addEventListener('click', function () {
+        userPaused = !userPaused; fig.classList.toggle('paused', userPaused);
+        pp.setAttribute('aria-label', userPaused ? 'Play walkthrough' : 'Pause walkthrough');
+        app.querySelectorAll('.spin').forEach(function (s) { s.style.animationPlayState = userPaused ? 'paused' : ''; });
+      });
+    }
+
+    // Enlarge: move the live demo into the dialog, and back when it closes
+    if (!dlg || !dlg.showModal) return;
+    fig.querySelector('.shot-btn').addEventListener('click', function () {
+      lbScale.appendChild(app); dlg.showModal(); visible = true; requestAnimationFrame(fit);
     });
+    dlg.addEventListener('close', function () { home.appendChild(app); fit(); });
     dlg.querySelector('.lb-close').addEventListener('click', function () { dlg.close(); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   })();
